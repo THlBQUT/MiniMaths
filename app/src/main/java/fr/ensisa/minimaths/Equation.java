@@ -5,9 +5,6 @@ import java.util.ArrayList;
 
 public class Equation {
 
-    private enum Niveau {FACILE, MOYEN, DIFFICILE}
-
-    ;
     private ArrayList<String> operandes = new ArrayList<String>() {{
         add("+");
         add("-");
@@ -17,14 +14,18 @@ public class Equation {
     private int resultat;
     private String equation;
 
-    public Equation(Niveau niveau) {
-        generator(niveau);
+    public Equation(String String) {
+        generator(String);
     }
 
-    private void generator(Niveau niveau) {
+    public int getResultat() {return resultat;}
+
+    public String getEquation() {return equation;}
+
+    private void generator(String String) {
         int operation = (int) (Math.random() * 4) + 1;
-        switch (niveau) {
-            case FACILE:
+        switch (String) {
+            case "FACILE":
                 switch (operation) {
                     case 0:
                         generatorAdd(50);
@@ -39,7 +40,7 @@ public class Equation {
                         generatorDivi(20);
                         break;
                 }
-            case MOYEN:
+            case "MOYEN":
                 switch (operation) {
                     case 0:
                         generatorAdd(350);
@@ -55,7 +56,7 @@ public class Equation {
                         break;
                 }
                 break;
-            case DIFFICILE:
+            case "DIFFICILE":
                 switch (operation) {
                     case 0:
                         generatorAdd(1300);
