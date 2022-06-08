@@ -59,7 +59,7 @@ public class Equation {
                         generatorDivi(20);
                         break;
                     default:
-                        this.equation = "MOYENNE";
+                        break;
                 }
                 break;
             case "DIFFICILE":
@@ -77,11 +77,10 @@ public class Equation {
                         generatorDivi(40);
                         break;
                     default:
-                        this.equation = "DURE";
+                        break;
                 }
                 break;
             default:
-                this.equation = "COUCOU";
                 break;
         }
     }
