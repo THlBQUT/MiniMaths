@@ -31,12 +31,7 @@ public class LazerBattle extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lazer);
         Bundle extras = getIntent().getExtras();
-        String difficulty;
-        if (extras != null) {
-            difficulty = extras.getString("difficulty");
-        }
-        else
-            difficulty = "FACILE";
+        String difficulty = "FACILE";
         this.equation = new Equation(difficulty);
 
         this.textView = this.findViewById((R.id.textlazer));
@@ -68,7 +63,7 @@ public class LazerBattle extends AppCompatActivity {
             }
         };
         Thread thread = new Thread(runnable);
-        thread.start();
+        //thread.start();
 
         this.editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

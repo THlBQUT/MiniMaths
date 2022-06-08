@@ -6,25 +6,25 @@ import java.util.ArrayList;
 public class Equation {
 
     private ArrayList<String> operandes = new ArrayList<String>() {{
-        add("+");
-        add("-");
-        add("x");
-        add("/");
+        add("+"); add("-"); add("x"); add("/");
     }};
     private int resultat;
     private String equation;
 
-    public Equation(String String) {
-        generator(String);
+    public Equation(String string) {
+        generator(string);
     }
 
     public int getResultat() {return resultat;}
 
     public String getEquation() {return equation;}
 
-    private void generator(String String) {
+    private void generator(String difficulty) {
         int operation = (int) (Math.random() * 4) + 1;
-        switch (String) {
+        while(operation > 4){
+            operation = (int) (Math.random() * 4) + 1;
+        }
+        switch (difficulty) {
             case "FACILE":
                 switch (operation) {
                     case 0:
@@ -39,7 +39,11 @@ public class Equation {
                     case 3:
                         generatorDivi(20);
                         break;
+                    default:
+                        generator(difficulty);
+                        break;
                 }
+                break;
             case "MOYEN":
                 switch (operation) {
                     case 0:
@@ -54,6 +58,8 @@ public class Equation {
                     case 3:
                         generatorDivi(20);
                         break;
+                    default:
+                        this.equation = "MOYENNE";
                 }
                 break;
             case "DIFFICILE":
@@ -70,9 +76,12 @@ public class Equation {
                     case 3:
                         generatorDivi(40);
                         break;
+                    default:
+                        this.equation = "DURE";
                 }
                 break;
             default:
+                this.equation = "COUCOU";
                 break;
         }
     }
@@ -95,7 +104,7 @@ public class Equation {
         equation = rand1 + "";
         rand2 = (int)(Math.random() * num) + 1;
         equation += operandes.get(1);
-        while(rand1 < rand2) {
+        while(rand1 <= rand2) {
             rand2 = (int) (Math.random() * num) + 1;
         }
         this.resultat = rand1 - rand2;
@@ -105,9 +114,9 @@ public class Equation {
     private void generatorMult(int num){
         int rand1;
         int rand2;
-        rand1 = (int)(Math.random() * 15) + 1;
+        rand1 = (int)(Math.random() * num) + 1;
         equation = rand1 + "";
-        rand2 = (int)(Math.random() * 15) + 1;
+        rand2 = (int)(Math.random() * num) + 1;
         equation += operandes.get(2);
         this.resultat = rand1 * rand2;
         this.equation += rand2;
@@ -116,8 +125,8 @@ public class Equation {
     private void generatorDivi(int num) {
         int rand1;
         int rand2;
-        rand2 = (int)(Math.random() * 20 + 1);
-        rand1 = rand2 * (int)(Math.random() * 20 + 1);
+        rand2 = (int)(Math.random() * num + 1);
+        rand1 = rand2 * (int)(Math.random() * 6 + 1);
         equation = rand1 + "";
         equation += operandes.get(3);
         this.resultat = rand1 / rand2;
