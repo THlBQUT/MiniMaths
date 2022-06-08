@@ -4,29 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:onClick="skipIntro"
     tools:context=".LazerBattle">
 
-    <EditText
-        android:id="@+id/textinputlazer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="264dp"
-        android:backgroundTint="#AF2B2B"
-        android:ems="10"
-        android:inputType="number"
+    <TextView
+        android:id="@+id/lazerGame_intro_text1"
+        android:layout_width="351dp"
+        android:layout_height="323dp"
+        android:onClick="skipIntro"
+        android:text="Es-tu prêt à te battre dans un LAZER BATTLE!!"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+        android:textSize="48sp"
+        android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textlazer"
         android:layout_width="216dp"
         android:layout_height="50dp"
+        android:layout_marginBottom="68dp"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/textinputlazer"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -41,8 +48,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.312"
         tools:visibility="invisible" />
 
     <TextView
@@ -57,8 +66,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.312"
         tools:visibility="invisible" />
 
     <ProgressBar
@@ -66,14 +77,61 @@
         style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
         android:layout_width="378dp"
         android:layout_height="52dp"
+        android:layout_marginTop="152dp"
         android:indeterminate="false"
         android:progress="50"
         android:progressTint="#951D1D"
-        app:layout_constraintBottom_toTopOf="@+id/victory"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintHorizontal_bias="0.909"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.656" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lazerGame_intro_text2"
+        android:layout_width="290dp"
+        android:layout_height="28dp"
+        android:layout_marginBottom="116dp"
+        android:onClick="skipIntro"
+        android:text="Toucher pour continuer"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lazerGame_intro_text1" />
+
+    <EditText
+        android:id="@+id/textinputlazer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="264dp"
+        android:backgroundTint="#AF2B2B"
+        android:ems="10"
+        android:inputType="number"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar"
+        app:layout_constraintVertical_bias="0.969" />
+
+    <Button
+        android:id="@+id/lazerBattle_button_retry"
+        android:layout_width="250dp"
+        android:layout_height="66dp"
+        android:onClick="retry_button"
+        android:text="Retry ?"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/victory"
+        app:layout_constraintVertical_bias="0.241" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

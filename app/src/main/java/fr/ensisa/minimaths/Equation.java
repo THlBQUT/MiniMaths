@@ -50,37 +50,40 @@ public class Equation {
                         generatorAdd(350);
                         break;
                     case 1:
-                        generatorSub(250);
+                        generatorSub(350);
                         break;
                     case 2:
                         generatorMult(25);
                         break;
                     case 3:
-                        generatorDivi(20);
+                        generatorDivi(60);
                         break;
                     default:
+                        generator(difficulty);
                         break;
                 }
                 break;
             case "DIFFICILE":
                 switch (operation) {
                     case 0:
-                        generatorAdd(1300);
+                        generatorAdd(2000);
                         break;
                     case 1:
-                        generatorSub(1000);
+                        generatorSub(2000);
                         break;
                     case 2:
                         generatorMult(50);
                         break;
                     case 3:
-                        generatorDivi(40);
+                        generatorDivi(100);
                         break;
                     default:
+                        generator(difficulty);
                         break;
                 }
                 break;
             default:
+                generator(difficulty);
                 break;
         }
     }
