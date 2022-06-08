@@ -24,6 +24,7 @@
         android:layout_width="353dp"
         android:layout_height="50dp"
         android:layout_marginTop="184dp"
+        android:onClick="goToQuizz"
         android:text="Math'Quiz"
         android:textAlignment="viewStart"
         android:textStyle="bold"
