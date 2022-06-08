@@ -19,12 +19,12 @@ public class soloGameList extends AppCompatActivity {
     }
 
     public void goToLazerBattle(View v){
-        Intent intent = new Intent(this, LazerBattleMenu.class);
-        startActivity(intent);
+        Intent activityLazer = new Intent(this, LazerBattleMenu.class);
+        startActivity(activityLazer);
     }
 
     public void goToQuizz(View v){
-        Intent intent = new Intent(this, Quizz.class);
-        startActivity(intent);
+        Intent activityQuizz = new Intent(this, Quizz.class);
+        startActivity(activityQuizz);
     }
 }

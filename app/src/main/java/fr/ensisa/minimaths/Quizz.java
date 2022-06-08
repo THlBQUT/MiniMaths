@@ -2,7 +2,9 @@ package fr.ensisa.minimaths;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,20 +15,20 @@ public class Quizz extends AppCompatActivity {
 
     Equation equation;
     private TextView score;
-    private ArrayList<Button> buttonList = new ArrayList<Button>() {{
-        Button button1; Button button2; Button button3; Button button4;
-    }};
+    private ArrayList<Button> buttonList = new ArrayList<>();
     private TextView equationText;
     private int buttonChoose;
-    private int vies = 3;
+    private int vies = 2;
     private int actualScore;
     private String difficulty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e("Quizz","Oncreate");
         setContentView(R.layout.activity_quizz);
         Bundle extras = getIntent().getExtras();
+        if(extras != null) {this.difficulty= extras.getString("DIFFICULTY");}
         difficulty = "FACILE";
 
         this.equation = new Equation(difficulty);
@@ -34,10 +36,10 @@ public class Quizz extends AppCompatActivity {
         score = this.findViewById(R.id.score);
         equationText = this.findViewById(R.id.equation);
 
-        buttonList.set(0,this.findViewById(R.id.button1));
-        buttonList.set(1,this.findViewById(R.id.button2));
-        buttonList.set(2,this.findViewById(R.id.button3));
-        buttonList.set(3,this.findViewById(R.id.button4));
+        buttonList.add(this.findViewById(R.id.button1));
+        buttonList.add(this.findViewById(R.id.button2));
+        buttonList.add(this.findViewById(R.id.button3));
+        buttonList.add(this.findViewById(R.id.button4));
 
         actualScore = 0;
         game();
@@ -66,19 +68,18 @@ public class Quizz extends AppCompatActivity {
         }
     }
 
-    private void checkButton(View view){
+    public void checkButton(View view){
         if(view.getId() == buttonList.get(buttonChoose).getId()){
             this.actualScore++;
-            view.setBackgroundColor(0x33BB33);
             game();
         }
         else{
             if(vies == 0){
-                return;
+                Intent soloListGame = new Intent(this, soloGameList.class);
+                startActivity(soloListGame);;
             }
             else{
                 this.vies--;
-                view.setBackgroundColor(0xBB3333);
             }
         }
     }
