@@ -1,10 +1,13 @@
-package fr.ensisa.minimaths;
+package fr.ensisa.minimaths.lazerbattle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import fr.ensisa.minimaths.Constantes;
+import fr.ensisa.minimaths.R;
 
 public class LazerBattleMenu extends AppCompatActivity {
 
@@ -16,18 +19,18 @@ public class LazerBattleMenu extends AppCompatActivity {
 
     public void goOnEasy(View v){
         Intent intent = new Intent(this, LazerBattle.class);
-        intent.putExtra("DIFFICULTY", "FACILE");
+        intent.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, Constantes.ID_DIFFICULTY_FACILE);
         startActivity(intent);
     }
 
     public void goOnMedium(View v){
         Intent intent = new Intent(this, LazerBattle.class);
-        intent.putExtra("DIFFICULTY", "MOYEN");
+        intent.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, Constantes.ID_DIFFICULTY_MEDIUM);
         startActivity(intent);
     }
     public void goOnHard(View v){
         Intent intent = new Intent(this, LazerBattle.class);
-        intent.putExtra("DIFFICULTY", "DIFFICILE");
+        intent.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, Constantes.ID_DIFFICULTY_DIFFICILE);
         startActivity(intent);
     }
 }

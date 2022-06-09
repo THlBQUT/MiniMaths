@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class soloGameList extends AppCompatActivity {
+import fr.ensisa.minimaths.lazerbattle.LazerBattleMenu;
+
+public class SoloGameList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

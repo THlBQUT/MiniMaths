@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToSoloGames(View v){
-        Intent intent = new Intent(this, soloGameList.class);
+        Intent intent = new Intent(this, SoloGameList.class);
         startActivity(intent);
     }
 }

@@ -25,7 +25,7 @@ public class Equation {
             operation = (int) (Math.random() * 4) + 1;
         }
         switch (difficulty) {
-            case "FACILE":
+            case Constantes.ID_DIFFICULTY_FACILE:
                 switch (operation) {
                     case 0:
                         generatorAdd(50);
@@ -44,7 +44,7 @@ public class Equation {
                         break;
                 }
                 break;
-            case "MOYEN":
+            case Constantes.ID_DIFFICULTY_MEDIUM:
                 switch (operation) {
                     case 0:
                         generatorAdd(350);
@@ -63,7 +63,7 @@ public class Equation {
                         break;
                 }
                 break;
-            case "DIFFICILE":
+            case Constantes.ID_DIFFICULTY_DIFFICILE:
                 switch (operation) {
                     case 0:
                         generatorAdd(2000);

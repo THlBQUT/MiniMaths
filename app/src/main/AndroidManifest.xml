@@ -14,7 +14,7 @@
         android:theme="@style/Theme.MiniMaths"
         tools:targetApi="31" >
         <activity
-            android:name=".LazerBattleMenu"
+            android:name=".lazerbattle.LazerBattleMenu"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,10 +23,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".soloGameList"
+            android:name=".SoloGameList"
             android:exported="false" />
         <activity
-            android:name=".LazerBattle"
+            android:name=".lazerbattle.LazerBattle"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

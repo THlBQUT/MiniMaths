@@ -82,7 +82,7 @@ public class Quizz extends AppCompatActivity {
         }
         else{
             if(vies == 0){
-                Intent soloListGame = new Intent(this, soloGameList.class);
+                Intent soloListGame = new Intent(this, SoloGameList.class);
                 startActivity(soloListGame);;
             }
             else{

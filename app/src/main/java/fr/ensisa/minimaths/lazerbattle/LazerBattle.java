@@ -1,13 +1,10 @@
-package fr.ensisa.minimaths;
+package fr.ensisa.minimaths.lazerbattle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.media.audiofx.DynamicsProcessing;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -15,22 +12,28 @@ import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Random;
+import fr.ensisa.minimaths.Constantes;
+import fr.ensisa.minimaths.Equation;
+import fr.ensisa.minimaths.R;
 
 public class LazerBattle extends AppCompatActivity {
 
-    private ProgressBar progressBar;
+    private int progress = 50; //0 victoire du joueur gauche et 100 celui du joueur droite
     private TextView textView;
     private EditText editText;
     private TextView victory;
     private TextView defeat;
     private Button retryButton;
-    Equation equation;
+    private ImageView background;
+    private ImageView screen;
+    private ImageView player1;
+    private ImageView player2;
+    private Equation equation;
     private int compteur = 0;
-    private String difficulty = "FACILE";
+    private String difficulty = Constantes.DEFAULT_DIFFICULTY;
     private boolean isIntroSkip = false;
     private boolean finDePartie = false;
     private Thread thread;
@@ -47,8 +50,11 @@ public class LazerBattle extends AppCompatActivity {
         this.editText = this.findViewById(R.id.textinputlazer);
         this.victory= this.findViewById(R.id.victory);
         this.defeat = this.findViewById(R.id.defeat);
-        this.progressBar = this.findViewById(R.id.progressBar);
         this.retryButton = this.findViewById(R.id.lazerBattle_button_retry);
+        this.background = this.findViewById(R.id.background_lazer);
+        this.screen = this.findViewById(R.id.screen);
+        this.player1 = this.findViewById(R.id.player1);
+        this.player2 = this.findViewById(R.id.player2);
         textView.setText(equation.getEquation());
 
         Runnable runnable = new Runnable() {
@@ -57,19 +63,20 @@ public class LazerBattle extends AppCompatActivity {
             public void run() {
                 while(!finDePartie) {
                     compteuria += 1;
-                    progressBar.setProgress(progressBar.getProgress() - 5 * compteuria);
-                    if(progressBar.getProgress() <= progressBar.getMin()) {
-                        finDePartie = true;
-                        defeat.getHandler().post(new Runnable() {
-                            public void run() {
+                    progress = progress - Constantes.MULTIPLIER_LAZER_BATTLE_FIGHT * compteuria;
+                    defeat.getHandler().post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(progress <= 0) {
+                                finDePartie = true;
                                 defeat.setVisibility(View.VISIBLE);
                                 defeat();
                                 retryButton.setVisibility(View.VISIBLE);
                             }
-                        });
-                    }
+                        }
+                    });
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(5000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -94,8 +101,8 @@ public class LazerBattle extends AppCompatActivity {
                                 equation = new Equation(difficulty);
                                 textView.setText(equation.getEquation());
                                 compteur += 1;
-                                progressBar.setProgress(progressBar.getProgress() + 5 * compteur);
-                                if (progressBar.getProgress() >= progressBar.getMax()) {
+                                progress = progress + Constantes.MULTIPLIER_LAZER_BATTLE_FIGHT * compteur;
+                                if(progress >= 100) {
                                     change_visibility(View.INVISIBLE);
                                     victory.setVisibility(View.VISIBLE);
                                     retryButton.setVisibility(View.VISIBLE);
@@ -104,6 +111,14 @@ public class LazerBattle extends AppCompatActivity {
                             } else {
                                 Animation animShake = AnimationUtils.loadAnimation(LazerBattle.this, R.anim.shake);
                                 editText.startAnimation(animShake);
+                                progress = progress - Constantes.MULTIPLIER_LAZER_BATTLE_FIGHT * compteur / 2;
+                                compteur = 1;
+                                if(progress <= 0) {
+                                    finDePartie = true;
+                                    defeat.setVisibility(View.VISIBLE);
+                                    defeat();
+                                    retryButton.setVisibility(View.VISIBLE);
+                                }
                             }
                             return true;
                         } catch (NumberFormatException e) {
@@ -117,10 +132,31 @@ public class LazerBattle extends AppCompatActivity {
         }});
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finDePartie = true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finDePartie = true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finDePartie = true;
+    }
+
     protected void change_visibility(int visibility){
-        progressBar.setVisibility(visibility);
         editText.setVisibility(visibility);
         textView.setVisibility(visibility);
+        background.setVisibility(visibility);
+        screen.setVisibility(visibility);
+        player1.setVisibility(visibility);
+        player2.setVisibility(visibility);
     }
 
     public void skipIntro(View v){
