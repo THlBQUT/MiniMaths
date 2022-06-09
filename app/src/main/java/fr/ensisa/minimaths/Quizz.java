@@ -3,7 +3,9 @@ package fr.ensisa.minimaths;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -46,6 +48,9 @@ public class Quizz extends AppCompatActivity {
     }
 
     private void game() {
+        for(int i = 0; i < 4; i++){
+            ((Button) buttonList.get(i)).setBackgroundColor(getColor(R.color.default_quizz));
+        }
         this.equation = new Equation(difficulty);
         this.equationText.setText(equation.getEquation());
         this.score.setText(String.valueOf(actualScore));
@@ -71,6 +76,8 @@ public class Quizz extends AppCompatActivity {
     public void checkButton(View view){
         if(view.getId() == buttonList.get(buttonChoose).getId()){
             this.actualScore++;
+            ((Button)view).setBackgroundColor(Color.LTGRAY);
+            SystemClock.sleep(500);
             game();
         }
         else{
@@ -81,6 +88,7 @@ public class Quizz extends AppCompatActivity {
             else{
                 this.vies--;
             }
+            ((Button)view).setBackgroundColor(getColor(R.color.false_quizz));
         }
     }
 }

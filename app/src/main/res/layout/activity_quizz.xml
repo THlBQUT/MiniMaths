@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Quizz"
     tools:context=".Quizz">
 
     <TableRow
@@ -87,7 +88,8 @@
                 android:layout_height="145dp"
                 android:layout_margin="5dp"
                 android:onClick="checkButton"
-                android:text="Button" />
+                android:text="Button"
+                />
 
             <Button
                 android:id="@+id/button4"
