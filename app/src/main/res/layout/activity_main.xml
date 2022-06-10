@@ -10,20 +10,20 @@
         android:id="@+id/multiButton"
         android:layout_width="262dp"
         android:layout_height="53dp"
-        android:text="multijoueur"
         android:background="@drawable/gradient"
+        android:text="multijoueur"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/soloButton"
-        app:layout_constraintVertical_bias="0.17" />
+        app:layout_constraintVertical_bias="0.187" />
 
     <Button
         android:id="@+id/soloButton"
         android:layout_width="262dp"
         android:layout_height="53dp"
-        android:layout_marginTop="248dp"
+        android:layout_marginTop="284dp"
         android:background="@drawable/gradient"
         android:onClick="goToSoloGames"
         android:text="Solo"

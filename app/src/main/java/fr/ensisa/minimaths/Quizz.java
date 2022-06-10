@@ -5,13 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Quizz extends AppCompatActivity {
 
@@ -76,17 +80,40 @@ public class Quizz extends AppCompatActivity {
     public void checkButton(View view){
         if(view.getId() == buttonList.get(buttonChoose).getId()){
             this.actualScore++;
-            ((Button)view).setBackgroundColor(Color.LTGRAY);
-            SystemClock.sleep(500);
-            game();
+            Handler handler = new Handler();
+            ((Button)view).setBackgroundColor(getColor(R.color.true_quizz));
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    SystemClock.sleep(500);
+                    game();
+                }
+            });
         }
         else{
             if(vies == 0){
+                Handler handler = new Handler();
+                ImageView img = findViewById(R.id.heart1);
+                img.setImageResource(R.drawable.emptyheart);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        SystemClock.sleep(500);
+                    }
+                });
                 Intent soloListGame = new Intent(this, SoloGameList.class);
-                startActivity(soloListGame);;
+                startActivity(soloListGame);
             }
             else{
                 this.vies--;
+            }
+            if (this.vies == 1) {
+                ImageView img = findViewById(R.id.heart3);
+                img.setImageResource(R.drawable.emptyheart);
+            }
+            if (this.vies == 0) {
+                ImageView img = findViewById(R.id.heart2);
+                img.setImageResource(R.drawable.emptyheart);
             }
             ((Button)view).setBackgroundColor(getColor(R.color.false_quizz));
         }
