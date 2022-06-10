@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="#8C8484"
     android:onClick="skipIntro"
-    tools:context=".lazerbattle.LazerBattle">
+    tools:context=".lazerbattle.LazerBattle"
+    android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
 
     <TextView
         android:id="@+id/lazerGame_intro_text1"

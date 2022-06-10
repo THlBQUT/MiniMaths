@@ -4,33 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".startup_activity"
     android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
 
-    <Button
-        android:id="@+id/multiButton"
-        android:layout_width="262dp"
-        android:layout_height="53dp"
-        android:text="multijoueur"
-        android:background="@drawable/gradient"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="282dp"
+        android:layout_height="259dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/soloButton"
-        app:layout_constraintVertical_bias="0.17" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.434"
+        app:srcCompat="@drawable/bananagames" />
 
-    <Button
-        android:id="@+id/soloButton"
-        android:layout_width="262dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="248dp"
-        android:background="@drawable/gradient"
-        android:onClick="goToSoloGames"
-        android:text="Solo"
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.122"
+        android:indeterminate="true"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
