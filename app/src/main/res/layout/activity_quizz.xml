@@ -5,9 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Quizz"
-    tools:context=".Quizz">
+    tools:context=".Quizz"
+    android:background="@drawable/background_quizz_v2">
+
+    <ImageView
+        android:id="@+id/TV"
+        android:layout_width="294dp"
+        android:layout_height="199dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32999998"
+        app:srcCompat="@drawable/tv_equation" />
+
+    <TextView
+        android:id="@+id/equation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EQUATION"
+        android:textAlignment="inherit"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.27"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35000002" />
 
     <TableRow
+        android:id="@+id/tableRow2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="@+id/tableLayout"
@@ -77,16 +106,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-                android:id="@+id/equation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="EQUATION"
-                android:textAlignment="center"
-                android:textSize="47sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="150dp"/>
 
         <TableRow
             android:layout_width="match_parent"

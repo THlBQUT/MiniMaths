@@ -51,6 +51,8 @@ public class Quizz extends AppCompatActivity {
     }
 
     private void game() {
+        ImageView img = findViewById(R.id.TV);
+        img.setImageResource(R.drawable.tv_equation);
         for(int i = 0; i < 4; i++){
             ((Button) buttonList.get(i)).setBackgroundColor(getColor(R.color.default_quizz));
         }
@@ -81,6 +83,10 @@ public class Quizz extends AppCompatActivity {
             this.actualScore++;
             Handler handler = new Handler();
             ((Button)view).setBackgroundColor(getColor(R.color.true_quizz));
+            ImageView img = findViewById(R.id.TV);
+            TextView txt = findViewById(R.id.equation);
+            txt.setText("");
+            img.setImageResource(R.drawable.tv_changement);
             handler.post(new Runnable() {
                 @Override
                 public void run() {
