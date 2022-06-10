@@ -1,35 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    android:baselineAligned="false"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/multiButton"
-        android:layout_width="262dp"
-        android:layout_height="53dp"
-        android:background="@drawable/gradient"
-        android:text="multijoueur"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/soloButton"
-        app:layout_constraintVertical_bias="0.187" />
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@color/header_background_color"
+        app:cardBackgroundColor="@color/header_background_color"
+        app:cardCornerRadius="6dp">
 
-    <Button
-        android:id="@+id/soloButton"
-        android:layout_width="262dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="284dp"
-        android:background="@drawable/gradient"
-        android:onClick="goToSoloGames"
-        android:text="Solo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="4dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:text="Pseudo"
+                android:textColor="@color/text_main_color"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="4dp"
+                android:background="@android:color/transparent"
+                android:padding="8dp"
+                app:srcCompat="@drawable/ic_baseline_home_24" />
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="4dp"
+                android:background="@android:color/transparent"
+                android:padding="4dp"
+                app:srcCompat="@drawable/ic_baseline_auto_graph_24" />
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="4dp"
+                android:background="@android:color/transparent"
+                android:padding="4dp"
+                app:srcCompat="@drawable/ic_baseline_settings_24" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        app:srcCompat="@drawable/main_logo" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom|center_horizontal"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/soloButton"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginLeft="55dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="30dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:onClick="goToSoloGames"
+            android:scaleType="fitCenter"
+            android:text="Solo"
+            app:srcCompat="@drawable/solo_main_button" />
+
+        <ImageButton
+            android:id="@+id/multiButton"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="65dp"
+            android:layout_marginBottom="30dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:text="multijoueur"
+            app:srcCompat="@drawable/multi_main_button" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
