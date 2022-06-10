@@ -26,7 +26,7 @@ public class SoloGameList extends AppCompatActivity {
     }
 
     public void goToQuizz(View v){
-        Intent activityQuizz = new Intent(this, Quizz.class);
+        Intent activityQuizz = new Intent(this, Quizz_Menu.class);
         startActivity(activityQuizz);
     }
 }

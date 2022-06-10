@@ -35,7 +35,6 @@ public class Quizz extends AppCompatActivity {
         setContentView(R.layout.activity_quizz);
         Bundle extras = getIntent().getExtras();
         if(extras != null) {this.difficulty= extras.getString("DIFFICULTY");}
-        difficulty = "FACILE";
 
         this.equation = new Equation(difficulty);
 
