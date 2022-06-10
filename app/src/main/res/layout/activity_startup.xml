@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".startup_activity"
-    android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+    tools:context=".startup_activity">
 
     <ImageView
         android:id="@+id/imageView"

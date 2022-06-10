@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SoloGameList"
-    android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+    tools:context=".SoloGameList">
 
     <Button
         android:id="@+id/button6"
