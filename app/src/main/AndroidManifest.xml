@@ -16,32 +16,19 @@
         <activity
             android:name=".lazerbattle.LazerBattleMenu"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".SoloGameList"
             android:exported="false" />
         <activity
             android:name=".lazerbattle.LazerBattle"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="true"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Quizz"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="true"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".MainActivity"
