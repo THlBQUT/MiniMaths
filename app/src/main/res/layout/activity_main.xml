@@ -21,7 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="4dp">
+            android:padding="4dp"
+            android:background="@android:color/transparent">
 
             <TextView
                 android:id="@+id/textView2"
@@ -32,11 +33,11 @@
                 android:layout_weight="1"
                 android:text="Pseudo"
                 android:textColor="@color/text_main_color"
-                android:textSize="16dp"
+                android:textSize="17dp"
                 android:textStyle="bold" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/main_home_button"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center_vertical"
@@ -46,7 +47,7 @@
                 app:srcCompat="@drawable/ic_baseline_home_24" />
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/main_score_button"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center_vertical"
@@ -56,13 +57,14 @@
                 app:srcCompat="@drawable/ic_baseline_auto_graph_24" />
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/main_settings_button"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="4dp"
                 android:background="@android:color/transparent"
                 android:padding="4dp"
+                android:onClick="goToSettings"
                 app:srcCompat="@drawable/ic_baseline_settings_24" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -86,7 +88,7 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_marginLeft="55dp"
+            android:layout_marginLeft="50dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="30dp"
             android:adjustViewBounds="true"
@@ -102,7 +104,7 @@
             android:layout_height="120dp"
             android:layout_gravity="center_horizontal|center_vertical"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="65dp"
+            android:layout_marginRight="70dp"
             android:layout_marginBottom="30dp"
             android:adjustViewBounds="true"
             android:background="@android:color/transparent"

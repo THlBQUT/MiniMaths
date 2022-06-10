@@ -14,5 +14,5 @@
     <color name="text_main_color">#FF000000</color>
     <color name="text_title_color">#FF050505</color>
     <color name="accent_color">#2067E3</color>
-    <color name="header_background_color">#AA9EA7B6</color>
+    <color name="header_background_color">#B0BACC</color>
 </resources>

@@ -15,7 +15,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToSoloGames(View v){
-        Intent intent = new Intent(this, SoloGameList.class);
-        startActivity(intent);
+        Intent soloGamesIntent = new Intent(this, SoloGameList.class);
+        startActivity(soloGamesIntent);
+    }
+
+    public void goToHome(View v){
+
+    }
+
+    public void goToRanking(View v){
+//
+    }
+
+    public void goToSettings(View v){
+        Intent settingsIntent = new Intent(this, Settings.class);
+        startActivity(settingsIntent);
+    }
+
+    public void backButton(View v){
+        onBackPressed();
     }
 }

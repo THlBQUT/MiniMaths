@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="SwitchTheme" parent="Theme.AppCompat.Light">
-        <item name="android:colorControlActivated">@color/accent_color</item>
+        <item name="android:colorControlActivated">@android:color/holo_orange_dark</item>
     </style>
 </resources>

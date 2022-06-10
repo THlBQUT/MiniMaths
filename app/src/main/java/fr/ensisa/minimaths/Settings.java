@@ -1,6 +1,9 @@
 package fr.ensisa.minimaths;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,22 +15,25 @@ public class Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.settings_view, new SettingsFragment())
-                    .commit();
-        }
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        SharedPreferences preferences = getSharedPreferences("SHARED_PREF_MAIN", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
     }
 
-    public static class SettingsFragment extends PreferenceFragmentCompat {
+    /*public static class SettingsFragment extends PreferenceFragmentCompat {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
         }
+    }*/
+    public void goToHome(View v){
+
+    }
+
+    public void goToRanking(View v){
+//
+    }
+
+    public void backButton(View v){
+        onBackPressed();
     }
 }
