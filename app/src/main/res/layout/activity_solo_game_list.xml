@@ -75,27 +75,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/info1"
-            tools:layout_editor_absoluteY="162dp"
-            tools:ignore="MissingConstraints"/>
+            tools:layout_editor_absoluteY="266dp"
+            tools:ignore="MissingConstraints" tools:layout_editor_absoluteX="294dp"/>
     <Button
             android:text="i"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/info2"
             app:layout_constraintTop_toBottomOf="@+id/info1"
-            android:layout_marginTop="56dp"/>
+            android:layout_marginTop="164dp" tools:layout_editor_absoluteX="294dp" tools:ignore="MissingConstraints"/>
     <Button
             android:text="i "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/info3"
-            android:layout_marginTop="56dp"/>
+            tools:layout_editor_absoluteY="379dp" tools:layout_editor_absoluteX="294dp"
+            tools:ignore="MissingConstraints"/>
     <Button
             android:text="i"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/info4"
-            android:layout_marginTop="56dp"/>
+            tools:layout_editor_absoluteY="162dp" tools:layout_editor_absoluteX="294dp"
+            tools:ignore="MissingConstraints"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
