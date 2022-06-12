@@ -1,19 +1,51 @@
 package fr.ensisa.minimaths;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.RelativeLayout;
 
 import fr.ensisa.minimaths.lazerbattle.LazerBattleMenu;
 
 public class SoloGameList extends AppCompatActivity {
 
+    private Animation animSlideIn2, animZoomIn5, animZoomIn6, animZoomIn7, animZoomIn8;
+    private CardView header2;
+    private RelativeLayout btn5, btn6, btn7, btn8;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solo_game_list);
+        header2 = findViewById(R.id.header_sologamelist);
+        btn5 = findViewById(R.id.solo_btn1);
+        btn6 = findViewById(R.id.solo_btn2);
+        btn7 = findViewById(R.id.solo_btn3);
+        btn8 = findViewById(R.id.solo_btn4);
+        animSlideIn2 = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_down);
+        animSlideIn2.setStartOffset(300);
+        animZoomIn5 = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_in);
+        animZoomIn5.setStartOffset(600);
+        animZoomIn6 = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_in);
+        animZoomIn6.setStartOffset(800);
+        animZoomIn7 = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_in);
+        animZoomIn7.setStartOffset(1000);
+        animZoomIn8 = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_in);
+        animZoomIn8.setStartOffset(1200);
+        header2.startAnimation(animSlideIn2);
+        btn5.startAnimation(animZoomIn5);
+        btn6.startAnimation(animZoomIn6);
+        btn7.startAnimation(animZoomIn7);
+        btn8.startAnimation(animZoomIn8);
+    }
+
+    public void backButton(View v){
+        onBackPressed();
     }
 
     public void returnHome(View v){

@@ -10,9 +10,10 @@
     tools:context=".MainActivity">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/header_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="15dp"
         android:background="@color/header_background_color"
         app:cardBackgroundColor="@color/header_background_color"
         app:cardCornerRadius="6dp">
@@ -20,9 +21,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:orientation="horizontal"
-            android:padding="4dp"
-            android:background="@android:color/transparent">
+            android:padding="6dp">
 
             <TextView
                 android:id="@+id/textView2"
@@ -33,38 +34,47 @@
                 android:layout_weight="1"
                 android:text="Pseudo"
                 android:textColor="@color/text_main_color"
-                android:textSize="17dp"
+                android:textSize="19sp"
                 android:textStyle="bold" />
 
             <ImageButton
                 android:id="@+id/main_home_button"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="4dp"
+                android:layout_marginHorizontal="6dp"
+                android:layout_marginVertical="4dp"
                 android:background="@android:color/transparent"
                 android:padding="8dp"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
                 app:srcCompat="@drawable/ic_baseline_home_24" />
 
             <ImageButton
-                android:id="@+id/main_score_button"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:id="@+id/main_rank_button"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="4dp"
+                android:layout_marginHorizontal="6dp"
+                android:layout_marginVertical="4dp"
                 android:background="@android:color/transparent"
                 android:padding="4dp"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
                 app:srcCompat="@drawable/ic_baseline_auto_graph_24" />
 
             <ImageButton
                 android:id="@+id/main_settings_button"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="4dp"
+                android:layout_marginHorizontal="6dp"
+                android:layout_marginVertical="4dp"
                 android:background="@android:color/transparent"
-                android:padding="4dp"
                 android:onClick="goToSettings"
+                android:padding="4dp"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
                 app:srcCompat="@drawable/ic_baseline_settings_24" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

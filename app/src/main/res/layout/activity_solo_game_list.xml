@@ -1,103 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   xmlns:tools="http://schemas.android.com/tools"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent"
-                                                   tools:context=".SoloGameList">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/gradient"
+    tools:context=".SoloGameList">
 
-    <Button
-            android:id="@+id/button6"
-            android:layout_width="353dp"
-            android:layout_height="50dp"
-            android:text="Le labyrinthe"
-            android:textAlignment="viewStart"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button2"
-            app:layout_constraintVertical_bias="0.166" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/header_sologamelist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@color/header_background_color"
+        app:cardBackgroundColor="@color/header_background_color"
+        app:cardCornerRadius="6dp">
 
-    <Button
-            android:id="@+id/button"
-            android:layout_width="353dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="184dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:orientation="horizontal"
+            android:padding="6dp">
+
+            <ImageButton
+                android:id="@+id/settings_button_return"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:background="@android:color/transparent"
+                android:translationX="5dp"
+                android:onClick="backButton"
+                app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:text="Jeux solo"
+                android:textColor="@color/text_main_color"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/main_home_button"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="6dp"
+                android:layout_marginVertical="4dp"
+                android:background="@android:color/transparent"
+                android:padding="8dp"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+                app:srcCompat="@drawable/ic_baseline_home_24" />
+
+            <ImageButton
+                android:id="@+id/main_rank_button"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="6dp"
+                android:layout_marginVertical="4dp"
+                android:background="@android:color/transparent"
+                android:padding="4dp"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+                app:srcCompat="@drawable/ic_baseline_auto_graph_24" />
+
+            <ImageButton
+                android:id="@+id/main_settings_button"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="6dp"
+                android:layout_marginVertical="4dp"
+                android:background="@android:color/transparent"
+
+                android:padding="4dp"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+                app:srcCompat="@drawable/ic_baseline_settings_24" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/solo_btn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="10dp">
+
+        <Button
+            android:id="@+id/solo_info1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignRight="@id/solo_mathquiz_button"
+            android:background="@android:color/transparent" />
+
+        <ImageButton
+            android:id="@+id/solo_mathquiz_button"
+            android:layout_width="252dp"
+            android:layout_height="110dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
             android:onClick="goToQuizz"
-            android:text="Math'Quiz"
-            android:textAlignment="viewStart"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:scaleType="fitCenter"
+            android:text="Mathquiz"
+            app:srcCompat="@drawable/solo_mathquiz_button" />
+    </RelativeLayout>
 
-    <Button
-            android:id="@+id/button2"
-            android:layout_width="353dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="52dp"
+    <RelativeLayout
+        android:id="@+id/solo_btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp">
+
+        <Button
+            android:id="@+id/solo_info2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignRight="@id/solo_meteorite_button"
+            android:background="@android:color/transparent" />
+
+        <ImageButton
+            android:id="@+id/solo_meteorite_button"
+            android:layout_width="252dp"
+            android:layout_height="110dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
             android:text="Meteorite"
-            android:textAlignment="viewStart"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button" />
+            app:srcCompat="@drawable/solo_meteorite_button" />
+    </RelativeLayout>
 
-    <Button
-            android:id="@+id/button3"
-            android:layout_width="353dp"
-            android:layout_height="50dp"
+    <RelativeLayout
+        android:id="@+id/solo_btn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp">
+
+        <Button
+            android:id="@+id/solo_info3"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignRight="@id/solo_labyrhinte_button"
+            android:background="@android:color/transparent" />
+
+        <ImageButton
+            android:id="@+id/solo_labyrhinte_button"
+            android:layout_width="252dp"
+            android:layout_height="110dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:text="Le labyrinthe"
+            app:srcCompat="@drawable/solo_labyrhinte_button" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/solo_btn4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp">
+
+        <Button
+            android:id="@+id/solo_info4"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignRight="@id/solo_lazerbattle_button"
+            android:background="@android:color/transparent" />
+
+        <ImageButton
+            android:id="@+id/solo_lazerbattle_button"
+            android:layout_width="252dp"
+            android:layout_height="110dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
             android:onClick="goToLazerBattle"
+            android:scaleType="fitCenter"
             android:text="Lazer Battle"
-            android:textAlignment="viewStart"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button6"
-            app:layout_constraintVertical_bias="0.215" />
+            app:srcCompat="@drawable/solo_lazerbattle_button" />
+    </RelativeLayout>
 
-    <ImageButton
-            android:id="@+id/onclick"
-            android:layout_width="51dp"
-            android:layout_height="45dp"
-            android:onClick="returnHome"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.044"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.023"
-            app:srcCompat="?attr/actionModeCloseDrawable" />
-    <Button
-            android:text="i"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/info1"
-            tools:layout_editor_absoluteY="266dp"
-            tools:ignore="MissingConstraints" tools:layout_editor_absoluteX="294dp"/>
-    <Button
-            android:text="i"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/info2"
-            app:layout_constraintTop_toBottomOf="@+id/info1"
-            android:layout_marginTop="164dp" tools:layout_editor_absoluteX="294dp" tools:ignore="MissingConstraints"/>
-    <Button
-            android:text="i "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/info3"
-            tools:layout_editor_absoluteY="379dp" tools:layout_editor_absoluteX="294dp"
-            tools:ignore="MissingConstraints"/>
-    <Button
-            android:text="i"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/info4"
-            tools:layout_editor_absoluteY="162dp" tools:layout_editor_absoluteX="294dp"
-            tools:ignore="MissingConstraints"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
 
