@@ -12,7 +12,7 @@
             android:layout_marginHorizontal="20dp"
             android:orientation="horizontal">
 
-            <TextView
+            <!--<TextView
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:text="@string/CRÉDITS:" 
@@ -40,7 +40,7 @@
                 android:textColor="@android:color/holo_orange_dark"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-
+-->
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="2dp"

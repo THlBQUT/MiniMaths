@@ -262,10 +262,6 @@
             android:onClick="googleConnect"
             android:text="Connect" />
 
-    </LinearLayout>
-    
-    </LinearLayout>
-
         <Button
             android:id="@+id/credits"
             android:layout_width="180dp"
