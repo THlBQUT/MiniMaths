@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import fr.ensisa.minimaths.lazerbattle.LazerBattleMenu;
 
@@ -60,5 +61,48 @@ public class SoloGameList extends AppCompatActivity {
     public void goToQuizz(View v){
         Intent activityQuizz = new Intent(this, Quizz_Menu.class);
         startActivity(activityQuizz);
+    }
+        public void goToLabyrinthTip(View v) {
+        Toast viewToast = Toast.makeText(this, "Retrouvez les nombres et opérateurs perdus dans le labyrinthe", Toast.LENGTH_LONG);
+        v.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v){
+                viewToast.show();
+                return false;
+            }
+        });
+    }
+
+    public void goToQuizzTip(View v) {
+        Toast viewToast = Toast.makeText(this, "Répondez aux divers calculs successifs posés dans le Quizz", Toast.LENGTH_LONG);
+        v.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v){
+                viewToast.show();
+                return false;
+            }
+        });
+    }
+
+    public void goToLazerTip(View v) {
+        Toast viewToast = Toast.makeText(this, "Répondez aux calculs le plus rapidement possible pour remporter le duel", Toast.LENGTH_LONG);
+        v.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v){
+                viewToast.show();
+                return false;
+            }
+        });
+    }
+
+    public void goToMeteorTip(View v) {
+        Toast viewToast = Toast.makeText(this, "Interceptez les météorites correctes pour résoudre le calcul proposé", Toast.LENGTH_LONG);
+        v.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v){
+                viewToast.show();
+                return false;
+            }
+        });
     }
 }
