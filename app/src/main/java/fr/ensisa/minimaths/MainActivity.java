@@ -10,12 +10,17 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 public class MainActivity extends AppCompatActivity {
 
     private Animation animSlideIn, animZoomIn1, animZoomIn2;
     private CardView header;
     private ImageButton btn1, btn2;
+    private GoogleSignInAccount account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         header.startAnimation(animSlideIn);
         btn1.startAnimation(animZoomIn1);
         btn2.startAnimation(animZoomIn2);
+        account = GoogleSignIn.getLastSignedInAccount(this);
+        if(account != null)
+            Toast.makeText(getApplicationContext(),"Welcome " + account.getDisplayName(), Toast.LENGTH_LONG).show();
     }
 
     public void goToSoloGames(View v){
