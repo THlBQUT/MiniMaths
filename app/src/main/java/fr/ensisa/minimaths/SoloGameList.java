@@ -58,6 +58,11 @@ public class SoloGameList extends AppCompatActivity {
         startActivity(activityLazer);
     }
 
+    public void goToMeteorite(View v){
+        //Intent activityLazer = new Intent(this, class);
+        //startActivity(activityLazer);
+    }
+
     public void goToQuizz(View v){
         Intent activityQuizz = new Intent(this, Quizz_Menu.class);
         startActivity(activityQuizz);
