@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "579660638098",
+    "project_id": "minimaths-84e80",
+    "storage_bucket": "minimaths-84e80.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579660638098:android:fd88192704169a8943834b",
+        "android_client_info": {
+          "package_name": "fr.ensisa.minimaths"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "579660638098-7h92jhreeiead7ptodp6m1bn07hgeioe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.ensisa.minimaths",
+            "certificate_hash": "59997cfcf61242d3161c860a835bb1f904ac1087"
+          }
+        },
+        {
+          "client_id": "579660638098-4iorlflb1a6l3o8gt2iihokt56e8753j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYvKuilkQ2xj-QaouJoSjuy2oY5j5Vp6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "579660638098-4iorlflb1a6l3o8gt2iihokt56e8753j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

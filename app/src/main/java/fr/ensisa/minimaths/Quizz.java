@@ -72,8 +72,14 @@ public class Quizz extends AppCompatActivity {
                 ((Button) buttonList.get(buttonChoose)).setText(String.valueOf(equation.getResultat()));
             }
             else{
-                int interval = (int) (Math.random() * 15) + 1;
-                ((Button) buttonList.get(i)).setText(String.valueOf(equation.getResultat()+interval));
+                int interval = (int) (Math.random() * 25) + 1;
+                int operation = (int) (Math.random() * 1);
+                if(operation == 1){
+                    ((Button) buttonList.get(i)).setText(String.valueOf(equation.getResultat()+interval));
+                }
+                else {
+                    ((Button) buttonList.get(i)).setText(String.valueOf(equation.getResultat()-interval));
+                }
             }
         }
     }
