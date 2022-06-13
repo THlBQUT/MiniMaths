@@ -100,6 +100,7 @@
 
         <Button
             android:id="@+id/solo_info1"
+            android:onClick="goToQuizzTip"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignRight="@id/solo_mathquiz_button"
@@ -127,6 +128,7 @@
 
         <Button
             android:id="@+id/solo_info2"
+            android:onClick="goToMeteorTip"                
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignRight="@id/solo_meteorite_button"
@@ -153,6 +155,7 @@
 
         <Button
             android:id="@+id/solo_info3"
+            android:onClick="goToLabyrinthTip"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignRight="@id/solo_labyrhinte_button"
@@ -179,6 +182,7 @@
 
         <Button
             android:id="@+id/solo_info4"
+            android:onClick="goToLazerTip"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignRight="@id/solo_lazerbattle_button"

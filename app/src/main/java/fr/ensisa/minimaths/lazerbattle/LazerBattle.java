@@ -49,6 +49,7 @@ public class LazerBattle extends AppCompatActivity {
     private boolean finDePartie = false;
     private Thread thread;
     private float distancesBetweenCharacters;
+    private float initialX;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,7 @@ public class LazerBattle extends AppCompatActivity {
         this.lazershock = this.findViewById(R.id.lazershock);
         textView.setText(equation.getEquation());
 
+        this.initialX =  this.lazerblue.getX() + player1.getLayoutParams().width;
         this.distancesBetweenCharacters = this.lazerblue.getLayoutParams().width;
         this.lazerblue.getLayoutParams().width = this.lazerblue.getLayoutParams().width / 2;
         this.lazerblue.setTranslationX(-this.lazerblue.getLayoutParams().width / 2);
@@ -116,8 +118,8 @@ public class LazerBattle extends AppCompatActivity {
                     if (event == null || !event.isShiftPressed()) {
                         try {
                             Integer numberInput = Integer.parseInt(editText.getText().toString());
+                            editText.setText("");
                             if (equation.getResultat() == numberInput) {
-                                editText.setText("");
                                 equation = new Equation(difficulty);
                                 textView.setText(equation.getEquation());
                                 compteur += 1;
@@ -302,20 +304,24 @@ public class LazerBattle extends AppCompatActivity {
 
     private void uiUpdateLazer(){
         if(progress>=100){
-            this.lazerblue.getLayoutParams().width = this.lazerred.getLayoutParams().width;
+            this.lazerblue.getLayoutParams().width =  this.lazerred.getLayoutParams().width;
+            this.lazerblue.setTranslationX(initialX - this.player1.getLayoutParams().width);
             this.lazershock.setVisibility(View.INVISIBLE);
+            this.lazerred.setVisibility(View.INVISIBLE);
         }
         else if(progress<=0){
             this.lazerblue.setVisibility(View.INVISIBLE);
             this.lazershock.setVisibility(View.INVISIBLE);        }
         else {
-            this.lazerblue.getLayoutParams().width = (int) (this.distancesBetweenCharacters * this.progress / 100);
+            this.lazerblue.getLayoutParams().width = (int) (this.lazerred.getLayoutParams().width * this.progress / 100);
+            this.lazerblue.setX(this.player1.getX() + this.player1.getLayoutParams().width);
+//            this.lazerblue.setTranslationX(this.lazerblue.getLayoutParams().width / 2);
             if(progress <=5)
                 this.lazershock.setX((int) (distancesBetweenCharacters * distancesBetweenCharacters * 0.05));
             else if(progress>=95)
                 this.lazershock.setX((int) (distancesBetweenCharacters * distancesBetweenCharacters * 0.95));
             else
-                this.lazershock.setX(distancesBetweenCharacters * progress / 100);
+                this.lazershock.setX(this.lazerblue.getX() + this.lazerblue.getLayoutParams().width / 2 + this.lazershock.getLayoutParams().width / 2);
         }
     }
 

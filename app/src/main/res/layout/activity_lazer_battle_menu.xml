@@ -101,7 +101,7 @@
       android:textStyle="bold" />
 
   <RelativeLayout
-      android:id="@+id/quiz_facile"
+      android:id="@+id/lazer_facile"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
@@ -209,7 +209,7 @@
   </RelativeLayout>
 
   <RelativeLayout
-      android:id="@+id/quiz_moyen"
+      android:id="@+id/lazer_moyen"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
@@ -317,7 +317,7 @@
   </RelativeLayout>
 
   <RelativeLayout
-      android:id="@+id/quiz_difficile"
+      android:id="@+id/lazer_difficile"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
