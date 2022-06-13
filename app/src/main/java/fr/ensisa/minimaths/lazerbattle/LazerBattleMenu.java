@@ -33,4 +33,8 @@ public class LazerBattleMenu extends AppCompatActivity {
         intent.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, Constantes.ID_DIFFICULTY_DIFFICILE);
         startActivity(intent);
     }
+
+    public void backButton(View v){
+        onBackPressed();
+    }
 }
