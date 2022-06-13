@@ -11,4 +11,6 @@ public class Constantes {
     public static final String DEFAULT_DIFFICULTY = ID_DIFFICULTY_FACILE;
 
     public static final int MULTIPLIER_LAZER_BATTLE_FIGHT = 4;
+
+    public static final int SPEED_ANSWER_IA = 5000;
 }
