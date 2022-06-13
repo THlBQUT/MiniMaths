@@ -3,8 +3,13 @@ package fr.ensisa.minimaths;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -27,13 +32,50 @@ public class Settings extends AppCompatActivity {
     private GoogleSignInClient client;
     private GoogleSignInAccount account;
     private int RC_CONNEXION;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
+    private Switch musique, vibration;
+    private String pseudo;
+    private EditText editPseudo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
-        SharedPreferences preferences = getSharedPreferences("SHARED_PREF_MAIN", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
+        preferences = getSharedPreferences("SHARED_PREF_MAIN", MODE_PRIVATE);
+        editor = preferences.edit();
+        musique = findViewById(R.id.settings_button_musique);
+        musique.setChecked(preferences.getBoolean("SHARED_PREF_MAIN_MUSIQUE", true));
+        musique.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                editor.putBoolean("SHARED_PREF_MAIN_MUSIQUE", isChecked);
+                editor.apply();
+            }
+        });
+        vibration = findViewById(R.id.settings_button_vibration);
+        vibration.setChecked(preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true));
+        vibration.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                editor.putBoolean("SHARED_PREF_MAIN_VIBRATION", isChecked);
+                editor.apply();
+            }
+        });
+        pseudo = preferences.getString("SHARED_PREF_MAIN_PSEUDO", "");
+        editPseudo = findViewById(R.id.settings_edittext_pseudo);
+        editPseudo.setText(pseudo);
+        editPseudo.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                editor.putString("SHARED_PREF_MAIN_PSEUDO",editPseudo.getText().toString());
+                editor.apply();
+            }
+        });
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail().requestProfile().build();
@@ -41,12 +83,6 @@ public class Settings extends AppCompatActivity {
         account = GoogleSignIn.getLastSignedInAccount(this);
     }
 
-    /*public static class SettingsFragment extends PreferenceFragmentCompat {
-        @Override
-        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            setPreferencesFromResource(R.xml.root_preferences, rootKey);
-        }
-    }*/
     public void goToHome(View v){
 
     }
@@ -57,6 +93,10 @@ public class Settings extends AppCompatActivity {
 
     public void backButton(View v){
         onBackPressed();
+    }
+
+    public void showCredits(View v) {
+
     }
 
     public void googleConnect(View v){

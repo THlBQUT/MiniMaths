@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -21,11 +23,16 @@ public class MainActivity extends AppCompatActivity {
     private CardView header;
     private ImageButton btn1, btn2;
     private GoogleSignInAccount account;
+    private TextView textPseudo;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        preferences = getSharedPreferences("SHARED_PREF_MAIN", MODE_PRIVATE);
+        editor = preferences.edit();
         header = findViewById(R.id.header_main);
         btn1 = findViewById(R.id.soloButton);
         btn2 = findViewById(R.id.multiButton);
@@ -38,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         header.startAnimation(animSlideIn);
         btn1.startAnimation(animZoomIn1);
         btn2.startAnimation(animZoomIn2);
+        textPseudo = findViewById(R.id.main_textview_pseudo);
+        textPseudo.setText(preferences.getString("SHARED_PREF_MAIN_PSEUDO", "Pseudo"));
         account = GoogleSignIn.getLastSignedInAccount(this);
         if(account != null)
             Toast.makeText(getApplicationContext(),"Welcome " + account.getDisplayName(), Toast.LENGTH_LONG).show();
