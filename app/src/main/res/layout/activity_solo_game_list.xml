@@ -195,6 +195,39 @@
             android:text="Lazer Battle"
             app:srcCompat="@drawable/solo_lazerbattle_button" />
     </RelativeLayout>
+    
+     <Button
+            android:text="i"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/info1"
+            android:onClick="goToMeteorTip"
+            tools:layout_editor_absoluteY="266dp"
+            tools:ignore="MissingConstraints,OnClick" tools:layout_editor_absoluteX="294dp"/>
+    <Button
+            android:text="i"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/info2"
+            android:onClick="goToLazerTip"
+            app:layout_constraintTop_toBottomOf="@+id/info1"
+            android:layout_marginTop="164dp" tools:layout_editor_absoluteX="294dp" tools:ignore="MissingConstraints,OnClick"/>
+    <Button
+            android:text="i "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/info3"
+            android:onClick="goToLabyrinthTip"
+            tools:layout_editor_absoluteY="379dp" tools:layout_editor_absoluteX="294dp"
+            tools:ignore="MissingConstraints,OnClick"/>
+    <Button
+            android:text="i"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/info4"
+            android:onClick="goToQuizzTip"
+            tools:layout_editor_absoluteY="162dp" tools:layout_editor_absoluteX="294dp"
+            tools:ignore="MissingConstraints,OnClick"/>
 
 
 </LinearLayout>
