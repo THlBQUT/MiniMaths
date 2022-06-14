@@ -74,7 +74,7 @@ public class FallingObject extends GameObject{
             this.isReady=true;
             return true;
         }
-        if(this.y>1500)
+        if(this.y>0.8 * this.gameSurface.getScreenHeight())
         {
             this.x=this.y=-200;
             this.isReady=true;
@@ -85,7 +85,7 @@ public class FallingObject extends GameObject{
     public void spawn()
     {
         int probability = ThreadLocalRandom.current().nextInt(0,100);
-        int rand= ThreadLocalRandom.current().nextInt(100,800);
+        int rand= ThreadLocalRandom.current().nextInt(100,(int)(this.gameSurface.getScreenWidth())-100);
         if(this.lastSpawn==-1)
         {
             this.lastSpawn = System.nanoTime();
