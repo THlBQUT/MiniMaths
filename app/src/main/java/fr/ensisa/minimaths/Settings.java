@@ -3,6 +3,8 @@ package fr.ensisa.minimaths;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -39,13 +41,17 @@ public class Settings extends AppCompatActivity {
     private Switch musique, vibration;
     private String pseudo;
     private EditText editPseudo;
+    private Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
+
         preferences = getSharedPreferences("SHARED_PREF_MAIN", MODE_PRIVATE);
         editor = preferences.edit();
+        vibrator = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
+
         musique = findViewById(R.id.settings_button_musique);
         musique.setChecked(preferences.getBoolean("SHARED_PREF_MAIN_MUSIQUE", true));
         musique.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
@@ -53,8 +59,11 @@ public class Settings extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 editor.putBoolean("SHARED_PREF_MAIN_MUSIQUE", isChecked);
                 editor.apply();
+                if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+                    vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
             }
         });
+
         vibration = findViewById(R.id.settings_button_vibration);
         vibration.setChecked(preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true));
         vibration.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
@@ -62,8 +71,11 @@ public class Settings extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 editor.putBoolean("SHARED_PREF_MAIN_VIBRATION", isChecked);
                 editor.apply();
+                if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+                    vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
             }
         });
+
         pseudo = preferences.getString("SHARED_PREF_MAIN_PSEUDO", "");
         editPseudo = findViewById(R.id.settings_edittext_pseudo);
         editPseudo.setText(pseudo);
@@ -89,6 +101,8 @@ public class Settings extends AppCompatActivity {
         Intent home = new Intent(this, MainActivity.class);
         startActivity(home);
         overridePendingTransition(0, android.R.anim.slide_out_right);
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
     }
 
     public void goToRanking(View v){
@@ -97,11 +111,15 @@ public class Settings extends AppCompatActivity {
 
     public void backButton(View v){
         onBackPressed();
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
     }
 
     public void showCredits(View v) {
         Intent activityCredits = new Intent(this, Credits.class);
         startActivity(activityCredits);
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
     }
 
     public void googleConnect(View v){
