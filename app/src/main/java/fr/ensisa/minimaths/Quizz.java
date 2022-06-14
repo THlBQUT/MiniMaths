@@ -3,7 +3,6 @@ package fr.ensisa.minimaths;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -14,8 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Quizz extends AppCompatActivity {
 
@@ -112,8 +109,9 @@ public class Quizz extends AppCompatActivity {
                         SystemClock.sleep(500);
                     }
                 });
-                Intent soloListGame = new Intent(this, SoloGameList.class);
-                startActivity(soloListGame);
+                Intent activityDefeat = new Intent(Quizz.this, QuizzDefeat.class);
+                activityDefeat.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, difficulty);
+                startActivity(activityDefeat);
             }
             else{
                 this.vies--;

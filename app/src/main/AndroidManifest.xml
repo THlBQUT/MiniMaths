@@ -67,7 +67,11 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".DefeatActivity"
+            android:name=".lazerbattle.DefeatActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".QuizzDefeat"
             android:exported="true"
             android:screenOrientation="portrait" />
     </application>
