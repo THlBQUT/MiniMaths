@@ -13,4 +13,5 @@ public class Constantes {
     public static final int MULTIPLIER_LAZER_BATTLE_FIGHT = 4;
 
     public static final int SPEED_ANSWER_IA = 5000;
+    public static final int PERCENTAGE_GOOD_ANSWER_IA = 85;
 }

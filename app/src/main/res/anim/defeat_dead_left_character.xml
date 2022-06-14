@@ -9,7 +9,6 @@
     <translate android:duration = "700"
         android:fromXDelta = "0%"
         android:fromYDelta="0%"
-        android:repeatCount = "0"
         android:toYDelta="-100%"
         android:toXDelta = "-150%"/>
 </set>
