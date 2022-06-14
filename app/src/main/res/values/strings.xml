@@ -16,4 +16,5 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="cr_dits_n_njordan_duranton_nbastien_cron_nthibaut_hertzog_nthomas_fontaine_nmohamed_salhani_nmouad_zaraidi_nvalentin_da_rocha">CRÉDITS:\n\nJordan DURANTON\nBastien CRON\nThibaut HERTZOG\nThomas FONTAINE\nMohamed SALHANI\nMouad ZARAIDI\nValentin DA ROCHA</string>
 </resources>
