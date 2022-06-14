@@ -87,36 +87,36 @@ public class LazerBattle extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     int ia_answer = (int) (Math.random() * 100);
-                    if(ia_answer <= Constantes.PERCENTAGE_GOOD_ANSWER_IA) {
+                    if (ia_answer <= Constantes.PERCENTAGE_GOOD_ANSWER_IA) {
                         compteuria += 1;
                         progress = progress - Constantes.MULTIPLIER_LAZER_BATTLE_FIGHT * (int) (compteuria / 2);
-                    }
-                    else {
+                    } else {
                         progress = progress - Constantes.MULTIPLIER_LAZER_BATTLE_FIGHT;
                         compteuria = 0;
                     }
-                    defeat.getHandler().post(new Runnable() {
-                        @Override
-                        public void run() {
-                            uiUpdateLazer();
-                            if(compteuria >= 3){
-                                combo2.setVisibility(View.VISIBLE);
-                                Animation animShake = AnimationUtils.loadAnimation(LazerBattle.this, R.anim.shakecombo);
-                                combo2.startAnimation(animShake);
-                                combo2.setText(Integer.toString(compteuria));
-                                changeColorComboButton(combo2, compteuria);
+                    if (defeat.getHandler() != null) {
+                        defeat.getHandler().post(new Runnable() {
+                            @Override
+                            public void run() {
+                                uiUpdateLazer();
+                                if (compteuria >= 3) {
+                                    combo2.setVisibility(View.VISIBLE);
+                                    Animation animShake = AnimationUtils.loadAnimation(LazerBattle.this, R.anim.shakecombo);
+                                    combo2.startAnimation(animShake);
+                                    combo2.setText(Integer.toString(compteuria));
+                                    changeColorComboButton(combo2, compteuria);
+                                } else {
+                                    combo2.clearAnimation();
+                                    combo2.setVisibility(View.INVISIBLE);
+                                }
+                                if (progress <= 0 && !finDePartie) {
+                                    finDePartie = true;
+                                    defeat();
+                                    return;
+                                }
                             }
-                            else{
-                                combo2.clearAnimation();
-                                combo2.setVisibility(View.INVISIBLE);
-                            }
-                            if(progress <= 0 && !finDePartie) {
-                                finDePartie = true;
-                                defeat();
-                                return;
-                            }
-                        }
-                    });
+                        });
+                    }
                 }
             }
         };
@@ -157,6 +157,7 @@ public class LazerBattle extends AppCompatActivity {
                                 compteur = 0;
                                 combo.clearAnimation();
                                 combo.setVisibility(View.INVISIBLE);
+                                combo2.setVisibility(View.INVISIBLE);
                                 if(progress <= 0 && !finDePartie) {
                                     finDePartie = true;
                                     defeat.setVisibility(View.VISIBLE);
@@ -182,20 +183,24 @@ public class LazerBattle extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        finDePartie = true;
-        this.finish();
+        clearGame();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        finDePartie = true;
+        clearGame();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        clearGame();
+    }
+
+    private void clearGame(){
         finDePartie = true;
+        this.finish();
     }
 
     protected void change_visibility(int visibility){
