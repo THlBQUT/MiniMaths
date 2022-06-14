@@ -6,7 +6,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MeteorActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
