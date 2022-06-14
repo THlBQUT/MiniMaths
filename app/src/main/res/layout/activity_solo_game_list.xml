@@ -141,6 +141,7 @@
             android:layout_gravity="center"
             android:adjustViewBounds="true"
             android:background="@android:color/transparent"
+            android:onClick="goToMeteorite"
             android:scaleType="fitCenter"
             android:text="Meteorite"
             app:srcCompat="@drawable/solo_meteorite_button" />

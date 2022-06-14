@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import fr.ensisa.minimaths.lazerbattle.LazerBattleMenu;
+import fr.ensisa.minimaths.meteorite.MeteorActivity;
 
 public class SoloGameList extends AppCompatActivity {
 
@@ -59,8 +60,8 @@ public class SoloGameList extends AppCompatActivity {
     }
 
     public void goToMeteorite(View v){
-        //Intent activityLazer = new Intent(this, class);
-        //startActivity(activityLazer);
+        Intent activityMeteorite = new Intent(this, MeteorActivity.class);
+        startActivity(activityMeteorite);
     }
 
     public void goToQuizz(View v){
