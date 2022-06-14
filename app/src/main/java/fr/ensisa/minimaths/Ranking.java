@@ -3,7 +3,10 @@ package fr.ensisa.minimaths;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -14,11 +17,18 @@ import org.xmlpull.v1.XmlPullParser;
 public class Ranking extends AppCompatActivity {
 
     private LinearLayout rankLayout;
+    private Vibrator vibrator;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
+
+        preferences = getSharedPreferences("SHARED_PREF_MAIN", MODE_PRIVATE);
+        editor = preferences.edit();
+        vibrator = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
 
         this.rankLayout = this.findViewById(R.id.rank);
 
@@ -50,5 +60,28 @@ public class Ranking extends AppCompatActivity {
         for(int i=0; i<50; i++){
             createOneRow();
         }
+    }
+    public void goToHome(View v){
+        Intent home = new Intent(this, MainActivity.class);
+        startActivity(home);
+        overridePendingTransition(0, android.R.anim.slide_out_right);
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+        finish();
+    }
+
+    public void goToSettings(View v){
+        Intent settingsIntent = new Intent(this, Settings.class);
+        startActivity(settingsIntent);
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+        finish();
+    }
+
+    public void backButton(View v){
+        onBackPressed();
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+        finish();
     }
 }

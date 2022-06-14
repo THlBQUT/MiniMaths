@@ -5,6 +5,7 @@ import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -29,15 +30,14 @@ public class LoadingGame extends AppCompatActivity {
         Intent intent = new Intent(this, (Class<?>) bundle.get("class"));
         intent.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, bundle.getString(Constantes.ID_DIFFICULTY_NAME_EXTRAS));
 
-        Runnable waiting = new Runnable() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                SystemClock.sleep(1500);
                 startActivity(intent);
-                overridePendingTransition(R.anim.zoom_enter, 0);
+                overridePendingTransition(R.anim.zoom_enter, android.R.anim.fade_out);
+                finish();
             }
-        };
-        Thread thread1 = new Thread(waiting);
-        thread1.start();
+        },2000);
     }
 }

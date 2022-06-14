@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
     public void goToRanking(View v){
         Intent ranking = new Intent(this, Ranking.class);
         startActivity(ranking);
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
     }
 
     public void goToSettings(View v){

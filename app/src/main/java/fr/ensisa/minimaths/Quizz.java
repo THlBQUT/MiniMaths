@@ -1,13 +1,19 @@
 package fr.ensisa.minimaths;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,6 +30,11 @@ public class Quizz extends AppCompatActivity {
     private int vies = 2;
     private int actualScore;
     private String difficulty;
+    private Vibrator vibrator;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
+    private Animation animSlideIn18;
+    private CardView header18;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +43,15 @@ public class Quizz extends AppCompatActivity {
         setContentView(R.layout.activity_quizz);
         Bundle extras = getIntent().getExtras();
         if(extras != null) {this.difficulty= extras.getString("DIFFICULTY");}
+
+        preferences = getSharedPreferences("SHARED_PREF_MAIN", MODE_PRIVATE);
+        editor = preferences.edit();
+        vibrator = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
+
+        header18 = findViewById(R.id.header_quiz);
+        animSlideIn18 = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_down);
+        animSlideIn18.setStartOffset(300);
+        header18.startAnimation(animSlideIn18);
 
         this.equation = new Equation(difficulty);
 
@@ -126,5 +146,32 @@ public class Quizz extends AppCompatActivity {
             }
             ((Button)view).setBackgroundColor(getColor(R.color.false_quizz));
         }
+    }
+    public void goToHome(View v){
+        Intent home = new Intent(this, MainActivity.class);
+        startActivity(home);
+        overridePendingTransition(0, android.R.anim.slide_out_right);
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+    }
+
+    public void goToRanking(View v){
+        Intent ranking = new Intent(this, Ranking.class);
+        startActivity(ranking);
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+    }
+
+    public void goToSettings(View v){
+        Intent settingsIntent = new Intent(this, Settings.class);
+        startActivity(settingsIntent);
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+    }
+
+    public void backButton(View v){
+        onBackPressed();
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
     }
 }

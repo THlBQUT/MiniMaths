@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.view.View;
 
@@ -14,14 +15,13 @@ public class startup_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startup);
         Intent intent = new Intent(this, MainActivity.class);
-        Runnable waiting = new Runnable() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                SystemClock.sleep(2000);
                 startActivity(intent);
+                finish();
             }
-        };
-        Thread thread1 = new Thread(waiting);
-        thread1.start();
+        },2000);
     }
 }
