@@ -254,5 +254,21 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/connect"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:onClick="googleConnect"
+            android:text="Connect" />
+
+        <Button
+            android:id="@+id/credits"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:onClick="@layout/activity_credits"
+            android:text="Crédits" />
+
     </LinearLayout>
 </ScrollView>
