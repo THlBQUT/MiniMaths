@@ -32,7 +32,7 @@
             android:label="@string/title_activity_settings"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".Startup_activity"
+            android:name=".startup_activity"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
@@ -48,7 +48,7 @@
         <activity
             android:name=".SoloGameList"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".lazerbattle.LazerBattle"
             android:exported="true"
@@ -64,8 +64,16 @@
         <activity
             android:name=".Credits"
             android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".lazerbattle.DefeatActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".QuizzDefeat"
+            android:exported="true"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

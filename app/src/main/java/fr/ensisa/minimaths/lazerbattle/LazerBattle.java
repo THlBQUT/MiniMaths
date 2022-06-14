@@ -19,7 +19,6 @@ import android.widget.TextView;
 import java.util.concurrent.TimeUnit;
 
 import fr.ensisa.minimaths.Constantes;
-import fr.ensisa.minimaths.DefeatActivity;
 import fr.ensisa.minimaths.Equation;
 import fr.ensisa.minimaths.R;
 
@@ -257,6 +256,7 @@ public class LazerBattle extends AppCompatActivity {
 
                 noLazerPrompt();
                 Intent activityDefeat = new Intent(LazerBattle.this, DefeatActivity.class);
+                activityDefeat.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, difficulty);
                 startActivity(activityDefeat);
             }
 
