@@ -77,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToRanking(View v){
-//
+        Intent ranking = new Intent(this, Ranking.class);
+        startActivity(ranking);
     }
 
     public void goToSettings(View v){
