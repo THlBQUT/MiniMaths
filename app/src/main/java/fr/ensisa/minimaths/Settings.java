@@ -86,7 +86,9 @@ public class Settings extends AppCompatActivity {
     }
 
     public void goToHome(View v){
-
+        Intent home = new Intent(this, MainActivity.class);
+        startActivity(home);
+        overridePendingTransition(0, android.R.anim.slide_out_right);
     }
 
     public void goToRanking(View v){

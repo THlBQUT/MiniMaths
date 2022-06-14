@@ -58,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToHome(View v){
-
+        Intent home = new Intent(this, MainActivity.class);
+        startActivity(home);
     }
 
     public void goToRanking(View v){

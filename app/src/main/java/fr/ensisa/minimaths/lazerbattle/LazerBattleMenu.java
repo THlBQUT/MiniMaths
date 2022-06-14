@@ -11,7 +11,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 
 import fr.ensisa.minimaths.Constantes;
+import fr.ensisa.minimaths.MainActivity;
 import fr.ensisa.minimaths.R;
+import fr.ensisa.minimaths.Settings;
 
 public class LazerBattleMenu extends AppCompatActivity {
 
@@ -60,5 +62,16 @@ public class LazerBattleMenu extends AppCompatActivity {
 
     public void backButton(View v){
         onBackPressed();
+    }
+
+    public void goToHome(View v){
+        Intent home = new Intent(this, MainActivity.class);
+        startActivity(home);
+        overridePendingTransition(0, android.R.anim.slide_out_right);
+    }
+
+    public void goToSettings(View v){
+        Intent settingsIntent = new Intent(this, Settings.class);
+        startActivity(settingsIntent);
     }
 }

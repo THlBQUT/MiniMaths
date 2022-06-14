@@ -54,6 +54,17 @@ public class SoloGameList extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    public void goToHome(View v){
+        Intent home = new Intent(this, MainActivity.class);
+        startActivity(home);
+        overridePendingTransition(0, android.R.anim.slide_out_right);
+    }
+
+    public void goToSettings(View v){
+        Intent settingsIntent = new Intent(this, Settings.class);
+        startActivity(settingsIntent);
+    }
+
     public void goToLazerBattle(View v){
         Intent activityLazer = new Intent(this, LazerBattleMenu.class);
         startActivity(activityLazer);
