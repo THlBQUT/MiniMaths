@@ -78,15 +78,15 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         paint.setColor(Color.WHITE);
         paint.setTextSize(80);
         String score="Score: ".concat(String.valueOf(panel.getScore()));
-        canvas.drawText(score,(int) (0.7*screenWidth),(int) (0.1*screenHeight),paint);
+        canvas.drawText(score,(int) (0.6*screenWidth),(int) (0.1*screenHeight),paint);
         paint.setTextSize(60);
-        canvas.drawText(panel.getEquation(),(int) (0.7*screenWidth),(int) (0.15*screenHeight),paint);
+        canvas.drawText(panel.getEquation(),(int) (0.6*screenWidth),(int) (0.15*screenHeight),paint);
         this.chibi1.draw(canvas);
         for(FallingObject f: this.fs)  {
             f.draw(canvas);
             canvas.drawText(String.valueOf(f.getValue()),f.getX()+65,f.getY()+100,paint);
         }
-        int x=150;
+        int x=(int)(0.1*getScreenWidth());
         int y=150;
         for(int i=0;i<this.panel.getLife();i++) {
             canvas.drawBitmap(BitmapFactory.decodeResource(this.getResources(), R.drawable.heart), x, y, null);
