@@ -74,4 +74,5 @@ public class LazerBattleMenu extends AppCompatActivity {
         Intent settingsIntent = new Intent(this, Settings.class);
         startActivity(settingsIntent);
     }
+
 }

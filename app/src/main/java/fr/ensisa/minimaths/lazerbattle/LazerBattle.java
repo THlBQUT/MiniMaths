@@ -19,6 +19,7 @@ import android.widget.TextView;
 import java.util.concurrent.TimeUnit;
 
 import fr.ensisa.minimaths.Constantes;
+import fr.ensisa.minimaths.DefeatActivity;
 import fr.ensisa.minimaths.Equation;
 import fr.ensisa.minimaths.R;
 
@@ -58,8 +59,6 @@ public class LazerBattle extends AppCompatActivity {
         this.textView = this.findViewById((R.id.textlazer));
         this.editText = this.findViewById(R.id.textinputlazer);
         this.victory= this.findViewById(R.id.victory);
-        this.defeat = this.findViewById(R.id.defeat);
-        this.retryButton = this.findViewById(R.id.lazerBattle_button_retry);
         this.background = this.findViewById(R.id.background_lazer);
         this.screen = this.findViewById(R.id.screen);
         this.player1 = this.findViewById(R.id.player1);
@@ -94,8 +93,8 @@ public class LazerBattle extends AppCompatActivity {
                         progress = progress - Constantes.MULTIPLIER_LAZER_BATTLE_FIGHT;
                         compteuria = 0;
                     }
-                    if (defeat.getHandler() != null) {
-                        defeat.getHandler().post(new Runnable() {
+                    if (background.getHandler() != null) {
+                        background.getHandler().post(new Runnable() {
                             @Override
                             public void run() {
                                 uiUpdateLazer();
@@ -255,11 +254,10 @@ public class LazerBattle extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 change_visibility(View.INVISIBLE);
-                defeat.setVisibility(View.VISIBLE);
-                retryButton.setVisibility(View.VISIBLE);
-                intro2.setText("Cliquer pour retourner à l'accueil");
-                intro2.setVisibility(View.VISIBLE);
+
                 noLazerPrompt();
+                Intent activityDefeat = new Intent(LazerBattle.this, DefeatActivity.class);
+                startActivity(activityDefeat);
             }
 
             @Override

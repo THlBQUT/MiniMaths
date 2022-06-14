@@ -38,20 +38,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="invisible" />
 
-    <Button
-        android:id="@+id/lazerBattle_button_retry"
-        android:layout_width="250dp"
-        android:layout_height="66dp"
-        android:onClick="retry_button"
-        android:text="Retry ?"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/victory"
-        app:layout_constraintVertical_bias="0.233"
-        tools:visibility="invisible" />
 
     <TextView
         android:id="@+id/victory"
@@ -71,23 +57,6 @@
         app:layout_constraintVertical_bias="0.312"
         tools:visibility="invisible" />
 
-    <TextView
-        android:id="@+id/defeat"
-        android:layout_width="352dp"
-        android:layout_height="149dp"
-        android:text="Defeat"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-        android:textColor="#D52B1E"
-        android:textSize="96sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.312"
-        tools:visibility="invisible" />
 
     <TextView
         android:id="@+id/lazerGame_intro_text2"
@@ -281,5 +250,6 @@
         app:layout_constraintVertical_bias="0.917"
         app:srcCompat="@drawable/female"
         tools:visibility="visible" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
