@@ -27,6 +27,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import fr.ensisa.minimaths.Credits;
+
 public class Settings extends AppCompatActivity {
 
     private GoogleSignInClient client;
@@ -96,7 +98,8 @@ public class Settings extends AppCompatActivity {
     }
 
     public void showCredits(View v) {
-
+        Intent activityCredits = new Intent(this, Credits.class);
+        startActivity(activityCredits);
     }
 
     public void googleConnect(View v){
@@ -139,4 +142,6 @@ public class Settings extends AppCompatActivity {
         }
 
     }
+
+
 }
