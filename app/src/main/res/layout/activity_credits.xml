@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:text="@string/cr_dits_n_njordan_duranton_nbastien_cron_nthibaut_hertzog_nthomas_fontaine_nmohamed_salhani_nmouad_zaraidi_nvalentin_da_rocha"
+        android:text="@string/credits"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:textColor="@android:color/holo_orange_dark"
