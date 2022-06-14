@@ -76,23 +76,26 @@ public class Quizz_Menu extends AppCompatActivity {
     }
 
     public void goQuizzOnEasy(View v){
-        Intent intent = new Intent(this, Quizz.class);
+        Intent intent = new Intent(this, LoadingGame.class);
         intent.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, Constantes.ID_DIFFICULTY_FACILE);
+        intent.putExtra("class", Quizz.class);
         startActivity(intent);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
     }
 
     public void goQuizzOnMedium(View v){
-        Intent intent = new Intent(this, Quizz.class);
+        Intent intent = new Intent(this, LoadingGame.class);
         intent.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, Constantes.ID_DIFFICULTY_MEDIUM);
+        intent.putExtra("class", Quizz.class);
         startActivity(intent);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
     }
     public void goQuizzOnHard(View v){
-        Intent intent = new Intent(this, Quizz.class);
+        Intent intent = new Intent(this, LoadingGame.class);
         intent.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, Constantes.ID_DIFFICULTY_DIFFICILE);
+        intent.putExtra("class", Quizz.class);
         startActivity(intent);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));

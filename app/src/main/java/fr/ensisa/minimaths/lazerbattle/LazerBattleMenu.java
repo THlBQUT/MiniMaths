@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import fr.ensisa.minimaths.Constantes;
+import fr.ensisa.minimaths.LoadingGame;
 import fr.ensisa.minimaths.MainActivity;
 import fr.ensisa.minimaths.R;
 import fr.ensisa.minimaths.Settings;
@@ -77,23 +78,26 @@ public class LazerBattleMenu extends AppCompatActivity {
     }
 
     public void goOnEasy(View v){
-        Intent intent = new Intent(this, LazerBattle.class);
+        Intent intent = new Intent(this, LoadingGame.class);
         intent.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, Constantes.ID_DIFFICULTY_FACILE);
+        intent.putExtra("class", LazerBattle.class);
         startActivity(intent);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
     }
 
     public void goOnMedium(View v){
-        Intent intent = new Intent(this, LazerBattle.class);
+        Intent intent = new Intent(this, LoadingGame.class);
         intent.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, Constantes.ID_DIFFICULTY_MEDIUM);
+        intent.putExtra("class", LazerBattle.class);
         startActivity(intent);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
     }
     public void goOnHard(View v){
-        Intent intent = new Intent(this, LazerBattle.class);
+        Intent intent = new Intent(this, LoadingGame.class);
         intent.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, Constantes.ID_DIFFICULTY_DIFFICILE);
+        intent.putExtra("class", LazerBattle.class);
         startActivity(intent);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));

@@ -17,7 +17,7 @@ public class startup_activity extends AppCompatActivity {
         Runnable waiting = new Runnable() {
             @Override
             public void run() {
-                SystemClock.sleep(2500);
+                SystemClock.sleep(2000);
                 startActivity(intent);
             }
         };
