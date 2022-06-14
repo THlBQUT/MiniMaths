@@ -5,16 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.view.inputmethod.EditorInfo;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,6 +27,7 @@ public class LazerBattle extends AppCompatActivity {
     private int progress = 50; //0 victoire du joueur gauche et 100 celui du joueur droite
     private TextView textView;
     private TextView combo;
+    private TextView combo2;
     private EditText editText;
     private TextView victory;
     private TextView defeat;
@@ -48,7 +45,6 @@ public class LazerBattle extends AppCompatActivity {
     private boolean isIntroSkip = false;
     private boolean finDePartie = false;
     private Thread thread;
-    private float distancesBetweenCharacters;
     private float initialX;
 
     @Override
@@ -69,16 +65,16 @@ public class LazerBattle extends AppCompatActivity {
         this.player1 = this.findViewById(R.id.player1);
         this.player2 = this.findViewById(R.id.player2);
         this.combo = this.findViewById(R.id.combo);
+        this.combo2 = this.findViewById(R.id.combo2);
         this.lazerred = this.findViewById(R.id.lazerred);
         this.lazerblue = this.findViewById(R.id.lazerblue);
         this.lazershock = this.findViewById(R.id.lazershock);
         textView.setText(equation.getEquation());
 
         this.initialX =  this.lazerblue.getX() + player1.getLayoutParams().width;
-        this.distancesBetweenCharacters = this.lazerblue.getLayoutParams().width;
         this.lazerblue.getLayoutParams().width = this.lazerblue.getLayoutParams().width / 2;
         this.lazerblue.setTranslationX(-this.lazerblue.getLayoutParams().width / 2);
-        this.lazershock.setX(this.lazerblue.getX() + this.lazerblue.getLayoutParams().width / 2);
+        this.lazerred.setX(this.player1.getX());
 
         Runnable runnable = new Runnable() {
             private int compteuria = 0;
@@ -90,15 +86,34 @@ public class LazerBattle extends AppCompatActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    compteuria += 1;
-                    progress = progress - Constantes.MULTIPLIER_LAZER_BATTLE_FIGHT * (int) (compteuria / 2);
+                    int ia_answer = (int) (Math.random() * 100);
+                    if(ia_answer <= Constantes.PERCENTAGE_GOOD_ANSWER_IA) {
+                        compteuria += 1;
+                        progress = progress - Constantes.MULTIPLIER_LAZER_BATTLE_FIGHT * (int) (compteuria / 2);
+                    }
+                    else {
+                        progress = progress - Constantes.MULTIPLIER_LAZER_BATTLE_FIGHT;
+                        compteuria = 0;
+                    }
                     defeat.getHandler().post(new Runnable() {
                         @Override
                         public void run() {
                             uiUpdateLazer();
-                            if(progress <= 0) {
+                            if(compteuria >= 3){
+                                combo2.setVisibility(View.VISIBLE);
+                                Animation animShake = AnimationUtils.loadAnimation(LazerBattle.this, R.anim.shakecombo);
+                                combo2.startAnimation(animShake);
+                                combo2.setText(Integer.toString(compteuria));
+                                changeColorComboButton(combo2, compteuria);
+                            }
+                            else{
+                                combo2.clearAnimation();
+                                combo2.setVisibility(View.INVISIBLE);
+                            }
+                            if(progress <= 0 && !finDePartie) {
                                 finDePartie = true;
                                 defeat();
+                                return;
                             }
                         }
                     });
@@ -128,10 +143,10 @@ public class LazerBattle extends AppCompatActivity {
                                     Animation animShake = AnimationUtils.loadAnimation(LazerBattle.this, R.anim.shakecombo);
                                     combo.startAnimation(animShake);
                                     combo.setText(Integer.toString(compteur));
-                                    changeColorComboButton();
+                                    changeColorComboButton(combo, compteur);
                                 }
                                 progress = progress + Constantes.MULTIPLIER_LAZER_BATTLE_FIGHT * (int) (compteur / 2);
-                                if(progress >= 100) {
+                                if(progress >= 100 && !finDePartie) {
                                     victory();
                                     finDePartie = true;
                                 }
@@ -142,7 +157,7 @@ public class LazerBattle extends AppCompatActivity {
                                 compteur = 0;
                                 combo.clearAnimation();
                                 combo.setVisibility(View.INVISIBLE);
-                                if(progress <= 0) {
+                                if(progress <= 0 && !finDePartie) {
                                     finDePartie = true;
                                     defeat.setVisibility(View.VISIBLE);
                                     defeat();
@@ -168,6 +183,7 @@ public class LazerBattle extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         finDePartie = true;
+        this.finish();
     }
 
     @Override
@@ -190,7 +206,9 @@ public class LazerBattle extends AppCompatActivity {
         player1.setVisibility(visibility);
         player2.setVisibility(visibility);
         combo.clearAnimation();
+        combo2.clearAnimation();
         combo.setVisibility(View.INVISIBLE);
+        combo2.setVisibility(View.INVISIBLE);
         lazershock.setVisibility(visibility);
         lazerred.setVisibility(visibility);
         lazerblue.setVisibility(visibility);
@@ -205,6 +223,7 @@ public class LazerBattle extends AppCompatActivity {
             change_visibility(View.VISIBLE);
             this.isIntroSkip = true;
             thread.start();
+            playAnimation();
         }
         if(finDePartie){
             change_visibility(View.INVISIBLE);
@@ -213,6 +232,7 @@ public class LazerBattle extends AppCompatActivity {
     }
 
     private void defeat(){
+        uiUpdateLazer();
         TextView intro2 = this.findViewById((R.id.lazerGame_intro_text2));
         Animation animDead = AnimationUtils.loadAnimation(LazerBattle.this, R.anim.defeat_dead_left_character);
         animDead.setAnimationListener(new Animation.AnimationListener() {
@@ -223,6 +243,12 @@ public class LazerBattle extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                stopAnimation();
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 change_visibility(View.INVISIBLE);
                 defeat.setVisibility(View.VISIBLE);
                 retryButton.setVisibility(View.VISIBLE);
@@ -240,6 +266,7 @@ public class LazerBattle extends AppCompatActivity {
     }
 
     private  void victory() throws InterruptedException {
+        uiUpdateLazer();
         TextView intro2 = this.findViewById((R.id.lazerGame_intro_text2));
         Animation animDead = AnimationUtils.loadAnimation(LazerBattle.this, R.anim.victory_dead_right_character);
         animDead.setAnimationListener(new Animation.AnimationListener() {
@@ -250,6 +277,7 @@ public class LazerBattle extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                stopAnimation();
                 try {
                     TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
@@ -275,6 +303,7 @@ public class LazerBattle extends AppCompatActivity {
         Intent intent = new Intent(this, LazerBattle.class);
         intent.putExtra("DIFFICULTY", this.difficulty);
         startActivity(intent);
+        this.finish();
     }
 
     public void returnHome(View v){
@@ -282,27 +311,28 @@ public class LazerBattle extends AppCompatActivity {
         this.finish();
     }
 
-    public void changeColorComboButton(){
-        switch (compteur){
+    public void changeColorComboButton(TextView textView, int compteurCombo){
+        switch (compteurCombo){
             case 3:
-                this.combo.setTextColor(Color.parseColor("#0000FF"));
+                textView.setTextColor(Color.parseColor("#0000FF"));
                 break;
             case 4:
-                this.combo.setTextColor(Color.parseColor("#00FF00"));
+                textView.setTextColor(Color.parseColor("#00FF00"));
                 break;
             case 5:
-                this.combo.setTextColor(Color.parseColor("#FAFD0F"));
+                textView.setTextColor(Color.parseColor("#FAFD0F"));
                 break;
             case 6:
-                this.combo.setTextColor(Color.parseColor("#FF6600"));
+                textView.setTextColor(Color.parseColor("#FF6600"));
                 break;
             default:
-                this.combo.setTextColor(Color.parseColor("#FF0000"));
+                textView.setTextColor(Color.parseColor("#FF0000"));
                 break;
         }
     }
 
     private void uiUpdateLazer(){
+        stopAnimation();
         if(progress>=100){
             this.lazerblue.getLayoutParams().width =  this.lazerred.getLayoutParams().width;
             this.lazerblue.setTranslationX(initialX - this.player1.getLayoutParams().width);
@@ -313,19 +343,35 @@ public class LazerBattle extends AppCompatActivity {
             this.lazerblue.setVisibility(View.INVISIBLE);
             this.lazershock.setVisibility(View.INVISIBLE);        }
         else {
+            int previousWidthLazerBlue = this.lazerblue.getLayoutParams().width;
             this.lazerblue.getLayoutParams().width = (int) (this.lazerred.getLayoutParams().width * this.progress / 100);
-            this.lazerblue.setX(this.player1.getX() + this.player1.getLayoutParams().width);
-//            this.lazerblue.setTranslationX(this.lazerblue.getLayoutParams().width / 2);
+            this.lazerblue.setX((float) (this.lazerred.getX()));
+//            this.lazerblue.setTranslationX(-this.lazerred.getLayoutParams().width * this.progress / 200);
             if(progress <=5)
-                this.lazershock.setX((int) (distancesBetweenCharacters * distancesBetweenCharacters * 0.05));
+                this.lazershock.setX((int) this.player1.getX() + this.player1.getLayoutParams().width/2);
             else if(progress>=95)
-                this.lazershock.setX((int) (distancesBetweenCharacters * distancesBetweenCharacters * 0.95));
+                this.lazershock.setX((int) this.player2.getX() - this.player1.getLayoutParams().width/2);
             else
-                this.lazershock.setX(this.lazerblue.getX() + this.lazerblue.getLayoutParams().width / 2 + this.lazershock.getLayoutParams().width / 2);
+                this.lazershock.setX((float) (this.player1.getX() + this.player1.getLayoutParams().width/2 + this.lazerred.getLayoutParams().width * this.progress / 100 - this.lazerblue.getLayoutParams().width * 0.15));
         }
+        if(!finDePartie)
+            playAnimation();
     }
 
     private void noLazerPrompt(){
         lazershock.setVisibility(View.INVISIBLE);
+    }
+
+    private void playAnimation(){
+        Animation animLazer = AnimationUtils.loadAnimation(LazerBattle.this, R.anim.lazer_shake);
+        this.lazerblue.startAnimation(animLazer);
+        this.lazerred.startAnimation(animLazer);
+        this.lazershock.startAnimation(animLazer);
+    }
+
+    private void stopAnimation(){
+        this.lazerred.clearAnimation();
+        this.lazershock.clearAnimation();
+        this.lazerblue.clearAnimation();
     }
 }
