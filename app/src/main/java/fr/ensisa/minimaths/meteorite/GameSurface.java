@@ -1,11 +1,13 @@
 package fr.ensisa.minimaths.meteorite;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -22,6 +24,9 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 
     private ChibiCharacter chibi1;
 
+    private int screenHeight;
+    private int screenWidth;
+
     private Panel panel;
 
 
@@ -30,6 +35,10 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
     public GameSurface(Context context)  {
         super(context);
 
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        this.screenHeight = displayMetrics.heightPixels;
+        this.screenWidth = displayMetrics.widthPixels;
         // Make Game Surface focusable so it can handle events.
         this.setFocusable(true);
 
@@ -69,9 +78,9 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         paint.setColor(Color.WHITE);
         paint.setTextSize(80);
         String score="Score: ".concat(String.valueOf(panel.getScore()));
-        canvas.drawText(score,600,200,paint);
+        canvas.drawText(score,(int) (0.7*screenWidth),(int) (0.1*screenHeight),paint);
         paint.setTextSize(60);
-        canvas.drawText(panel.getEquation(),650,300,paint);
+        canvas.drawText(panel.getEquation(),(int) (0.7*screenWidth),(int) (0.15*screenHeight),paint);
         this.chibi1.draw(canvas);
         for(FallingObject f: this.fs)  {
             f.draw(canvas);
@@ -92,7 +101,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         Bitmap chibiBitmap1 = BitmapFactory.decodeResource(this.getResources(),R.drawable.chibi1);
         Bitmap meteor = BitmapFactory.decodeResource(this.getResources(),R.drawable.meteor);
         Bitmap heart = BitmapFactory.decodeResource(this.getResources(),R.drawable.meteor);
-        this.chibi1 = new ChibiCharacter(this,chibiBitmap1,100,1300);
+        this.chibi1 = new ChibiCharacter(this,chibiBitmap1,(int) (screenWidth*0.5),(int) (screenHeight*0.7));
         this.panel= new Panel();
         for(int i=0;i<10;i++)
         {
@@ -124,6 +133,16 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
             }
             retry= true;
         }
+    }
+
+    public int getScreenHeight()
+    {
+        return screenHeight;
+    }
+
+    public int getScreenWidth()
+    {
+        return screenWidth;
     }
 
 }

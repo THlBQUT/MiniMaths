@@ -1,7 +1,13 @@
 
 package fr.ensisa.minimaths.meteorite;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.Point;
+import android.os.Build;
+import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.WindowManager;
 
 public abstract class GameObject {
 
@@ -12,6 +18,9 @@ public abstract class GameObject {
 
     protected final int WIDTH;
     protected final int HEIGHT;
+
+    private int screenHeight;
+    private int screenWidth;
 
     protected final int width;
 
@@ -34,7 +43,9 @@ public abstract class GameObject {
 
         this.width = this.WIDTH/ colCount;
         this.height= this.HEIGHT/ rowCount;
+
     }
+
 
     protected Bitmap createSubImageAt(int row, int col)  {
         // createBitmap(bitmap, x, y, width, height).
@@ -51,12 +62,12 @@ public abstract class GameObject {
     }
 
 
-    public int getHeight() {
-        return height;
+    public int getScreenHeight() {
+        return screenHeight;
     }
 
-    public int getWidth() {
-        return width;
+    public int getScreenWidth() {
+        return screenWidth;
     }
 
 }
