@@ -75,6 +75,7 @@ public class MultiDifficulty extends AppCompatActivity {
 
     public void goMultiOnEasy(View v){
         Intent intent = new Intent(this, PartyList.class);
+        intent.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, Constantes.ID_DIFFICULTY_FACILE);
         startActivity(intent);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -82,12 +83,14 @@ public class MultiDifficulty extends AppCompatActivity {
 
     public void goMultiOnMedium(View v){
         Intent intent = new Intent(this, PartyList.class);
+        intent.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS,Constantes.ID_DIFFICULTY_MEDIUM);
         startActivity(intent);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
     }
     public void goMultiOnHard(View v){
         Intent intent = new Intent(this, PartyList.class);
+        intent.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS,Constantes.ID_DIFFICULTY_DIFFICILE);
         startActivity(intent);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));

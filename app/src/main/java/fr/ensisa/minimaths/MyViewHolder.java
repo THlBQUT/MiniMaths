@@ -1,6 +1,8 @@
 package fr.ensisa.minimaths;
 
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class MyViewHolder extends RecyclerView.ViewHolder {
     private TextView roomName;
     private TextView roomDifficulty;
+
 
     public MyViewHolder(View itemview){
         super(itemview);

@@ -1,5 +1,7 @@
 package fr.ensisa.minimaths;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,13 +9,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,24 +30,63 @@ public class PartyList extends AppCompatActivity {
 
     private GoogleSignInAccount account;
     private String playerName;
-    private ArrayList<Room> roomList= new ArrayList<Room>(){{
-        add(new Room("room 1", "facile"));
-        add(new Room("room 2", "moyen"));
-        add(new Room("room 3", "difficile"));
-    }};
+    private ArrayList<Room> roomList= new ArrayList<Room>();
     private RecyclerView recyclerView;
     private RoomAdapter roomAdapter;
-
+    private LinearLayout linearLayout;
+    private String difficulty;
+    private DatabaseReference reference;
+    private FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_party_list);
         RecyclerView recyclerView = findViewById(R.id.rvRoom);
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {this.difficulty= extras.getString(Constantes.ID_DIFFICULTY_NAME_EXTRAS);}
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         roomAdapter = new RoomAdapter(this, roomList);
         recyclerView.setAdapter(roomAdapter);
+
+        database = FirebaseDatabase.getInstance("https://minimaths-84e80-default-rtdb.europe-west1.firebasedatabase.app/");
+        reference = database.getReference("multiplayer_room/");
+        reference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                for (DataSnapshot child: snapshot.getChildren()) {
+                    roomList.add(new Room(snapshot.getKey(), (String) snapshot.child("difficulty").getValue()));
+                }
+                Log.e("RoomList size ", String.valueOf(roomList.size()));
+                roomAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                int index = -1;
+                for (int i = 0; i<roomList.size(); i++){
+                    if (roomList.get(i).getName().equals(dataSnapshot.getKey().toString())){
+                        Log.e("Deleted item ", String.valueOf(i));
+                        index = i;
+                    }
+                }
+                if(index != -1) roomList.remove(index);
+                roomAdapter.notifyItemRemoved(index);
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
     public void createParty(View v){
@@ -49,13 +96,11 @@ public class PartyList extends AppCompatActivity {
         else{
             playerName = "Guest";
         }
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://minimaths-84e80-default-rtdb.europe-west1.firebasedatabase.app/");
-        DatabaseReference reference = database.getReference("multiplayer_room/" + playerName);
-
+        reference = database.getReference("multiplayer_room/" + playerName);
         reference.get().addOnCompleteListener(task1 ->{
             if(task1.getResult().getValue() == null){
-                DatabaseReference child = reference.child("ID");
-                child.setValue(playerName);
+                DatabaseReference child2 = reference.child("difficulty");
+                child2.setValue(difficulty.toLowerCase());
             }
             else {
                 Toast.makeText(this, "Une room a votre nom existe deja", Toast.LENGTH_LONG).show();
