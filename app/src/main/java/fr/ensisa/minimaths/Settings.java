@@ -86,7 +86,8 @@ public class Settings extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
             @Override
             public void afterTextChanged(Editable s) {
-                editor.putString("SHARED_PREF_MAIN_PSEUDO",editPseudo.getText().toString());
+                String nom = editPseudo.getText().toString();
+                editor.putString("SHARED_PREF_MAIN_PSEUDO", editPseudo.getText().toString());
                 editor.apply();
             }
         });
