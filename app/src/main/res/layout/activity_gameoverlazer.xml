@@ -13,8 +13,8 @@
             android:id="@+id/gameoverpicture"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
             android:layout_weight="1"
+            android:scaleType="centerCrop"
             app:srcCompat="@drawable/gameoverscreen" />
 
         <androidx.cardview.widget.CardView
@@ -65,5 +65,6 @@
                 android:text="Retour"
                 android:textColor="@android:color/black" />
         </androidx.cardview.widget.CardView>
+
     </RelativeLayout>
 </LinearLayout>

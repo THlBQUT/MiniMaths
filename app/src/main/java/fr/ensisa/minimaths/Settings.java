@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import fr.ensisa.minimaths.Credits;
 
 public class Settings extends AppCompatActivity {
@@ -42,6 +43,7 @@ public class Settings extends AppCompatActivity {
     private String pseudo;
     private EditText editPseudo;
     private Vibrator vibrator;
+    private CircleImageView img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,10 @@ public class Settings extends AppCompatActivity {
                     vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
             }
         });
+        account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account != null){
+            editPseudo.setText(account.getDisplayName());
+        }
 
         vibration = findViewById(R.id.settings_button_vibration);
         vibration.setChecked(preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true));
@@ -86,10 +92,12 @@ public class Settings extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
             @Override
             public void afterTextChanged(Editable s) {
-                editor.putString("SHARED_PREF_MAIN_PSEUDO",editPseudo.getText().toString());
+                String nom = editPseudo.getText().toString();
+                editor.putString("SHARED_PREF_MAIN_PSEUDO", editPseudo.getText().toString());
                 editor.apply();
             }
         });
+        img = findViewById(R.id.imgAccount);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail().requestProfile().build();
@@ -147,7 +155,7 @@ public class Settings extends AppCompatActivity {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             FirebaseDatabase database = FirebaseDatabase.getInstance("https://minimaths-84e80-default-rtdb.europe-west1.firebasedatabase.app/");
-            DatabaseReference reference = database.getReference();
+            DatabaseReference reference = database.getReference("user/" + account.getId());
 
             reference.get().addOnCompleteListener(task1 ->{
                 if(task1.getResult().getValue() == null){

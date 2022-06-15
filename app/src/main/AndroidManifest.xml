@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools"
-    package="fr.ensisa.minimaths"
-    xmlns:dist="http://schemas.android.com/apk/distribution">
+    package="fr.ensisa.minimaths">
 
     <dist:module dist:instant="true" />
+
     <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -18,26 +20,31 @@
         android:theme="@style/Theme.MiniMaths"
         tools:targetApi="31">
         <activity
+            android:name=".PartyList"
+            android:exported="false" />
+        <activity
+            android:name=".MultiDifficulty"
+            android:exported="false" />
+        <activity
             android:name=".LoadingGame"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Quizz_Menu"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Settings"
             android:exported="false"
             android:label="@string/title_activity_settings"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".startup_activity"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,11 +54,11 @@
         <activity
             android:name=".lazerbattle.LazerBattleMenu"
             android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SoloGameList"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".lazerbattle.LazerBattle"
             android:exported="true"
@@ -67,8 +74,7 @@
         <activity
             android:name=".Credits"
             android:exported="true"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".lazerbattle.DefeatActivity"
             android:exported="true"
@@ -80,7 +86,11 @@
         <activity
             android:name=".Ranking"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".lazerbattle.WinActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

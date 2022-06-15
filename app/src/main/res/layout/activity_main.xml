@@ -119,6 +119,7 @@
             android:layout_marginBottom="30dp"
             android:adjustViewBounds="true"
             android:background="@android:color/transparent"
+            android:onClick="goToMulti"
             android:scaleType="fitCenter"
             android:text="multijoueur"
             app:srcCompat="@drawable/multi_main_button" />

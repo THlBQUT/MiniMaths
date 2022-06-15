@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
         btn2 = findViewById(R.id.multiButton);
         textPseudo = findViewById(R.id.main_textview_pseudo);
 
-        animSlideIn = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_down);
-        animZoomIn1 = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_in);
-        animZoomIn2 = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_in);
+        animSlideIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down);
+        animZoomIn1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_in);
+        animZoomIn2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_in);
 
         animSlideIn.setStartOffset(300);
         animZoomIn1.setStartOffset(800);
@@ -58,8 +58,10 @@ public class MainActivity extends AppCompatActivity {
 
         textPseudo.setText(preferences.getString("SHARED_PREF_MAIN_PSEUDO", "Invité"));
         account = GoogleSignIn.getLastSignedInAccount(this);
-        if(account != null)
-            Toast.makeText(getApplicationContext(),"Welcome " + account.getDisplayName(), Toast.LENGTH_LONG).show();
+        if (account != null){
+            Toast.makeText(getApplicationContext(), "Welcome " + account.getDisplayName(), Toast.LENGTH_LONG).show();
+            textPseudo.setText(account.getDisplayName());
+        }
     }
 
     public void goToSoloGames(View v){
@@ -79,6 +81,12 @@ public class MainActivity extends AppCompatActivity {
     public void goToRanking(View v){
         Intent ranking = new Intent(this, Ranking.class);
         startActivity(ranking);
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+    }
+    public void goToMulti(View v){
+        Intent multiplayer = new Intent(this, MultiDifficulty.class);
+        startActivity(multiplayer);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
     }

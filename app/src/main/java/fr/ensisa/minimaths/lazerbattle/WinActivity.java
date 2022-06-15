@@ -15,7 +15,7 @@ import fr.ensisa.minimaths.R;
 import fr.ensisa.minimaths.lazerbattle.LazerBattle;
 import fr.ensisa.minimaths.lazerbattle.LazerBattleMenu;
 
-public class DefeatActivity extends AppCompatActivity {
+public class WinActivity extends AppCompatActivity {
 
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
@@ -24,7 +24,7 @@ public class DefeatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gameoverlazer);
+        setContentView(R.layout.activity_lazerwin);
 
         preferences = getSharedPreferences("SHARED_PREF_MAIN", MODE_PRIVATE);
         editor = preferences.edit();
@@ -36,10 +36,9 @@ public class DefeatActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         activityLazer.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, extras.getString(Constantes.ID_DIFFICULTY_NAME_EXTRAS));
         startActivity(activityLazer);
-        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
-            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
         this.finish();
     }
+
     public void goHome(View v){
         Intent home = new Intent(this, MainActivity.class);
         startActivity(home);

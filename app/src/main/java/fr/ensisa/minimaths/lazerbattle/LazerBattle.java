@@ -8,6 +8,8 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -23,33 +25,29 @@ import java.util.concurrent.TimeUnit;
 
 import fr.ensisa.minimaths.Constantes;
 import fr.ensisa.minimaths.Equation;
+import fr.ensisa.minimaths.MainActivity;
 import fr.ensisa.minimaths.R;
+import fr.ensisa.minimaths.Ranking;
+import fr.ensisa.minimaths.Settings;
 
 public class LazerBattle extends AppCompatActivity {
 
     private int progress = 50; //0 victoire du joueur gauche et 100 celui du joueur droite
-    private TextView textView;
-    private TextView combo;
-    private TextView combo2;
+    private TextView textView, combo, combo2;
     private EditText editText;
-    private ImageView background;
-    private ImageView screen;
-    private ImageView player1;
-    private ImageView player2;
-    private ImageView lazerred;
-    private ImageView lazerblue;
-    private ImageView lazershock;
+    private ImageView background, screen, player1, player2, lazerred, lazerblue, lazershock;
     private Equation equation;
     private int compteur = 0;
     private String difficulty = Constantes.DEFAULT_DIFFICULTY;
     private boolean isIntroSkip = false;
     private boolean finDePartie = false;
+    private boolean relativeDifficulty = false;
     private Thread thread;
     private float initialX;
-    private boolean relativeDifficulty = false;
     private MediaPlayer mp;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
+    private Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +57,7 @@ public class LazerBattle extends AppCompatActivity {
 
         preferences = getSharedPreferences("SHARED_PREF_MAIN", MODE_PRIVATE);
         editor = preferences.edit();
+        vibrator = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
 
         if(extras != null) {this.difficulty= extras.getString(Constantes.ID_DIFFICULTY_NAME_EXTRAS);}
         if(Objects.equals(this.difficulty, Constantes.ID_DIFFICULTY_RELATIVE)){
@@ -291,6 +290,9 @@ public class LazerBattle extends AppCompatActivity {
                 change_visibility(View.INVISIBLE);
                 noLazerPrompt();
                 mp.stop();
+                Intent activityWin = new Intent(LazerBattle.this, WinActivity.class);
+                activityWin.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, difficulty);
+                startActivity(activityWin);
             }
 
             @Override
@@ -299,6 +301,40 @@ public class LazerBattle extends AppCompatActivity {
             }
         });
         player2.startAnimation(animDead);
+    }
+
+    public void backButton(View v){
+        onBackPressed();
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+        this.finDePartie = true;
+        finish();
+    }
+
+    public void goToRanking(View v){
+        Intent ranking = new Intent(this, Ranking.class);
+        startActivity(ranking);
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+        finish();
+    }
+
+    public void goToHome(View v){
+        Intent home = new Intent(this, MainActivity.class);
+        startActivity(home);
+        overridePendingTransition(0, android.R.anim.slide_out_right);
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+        this.finDePartie = true;
+        finish();
+    }
+
+    public void goToSettings(View v){
+        Intent settingsIntent = new Intent(this, Settings.class);
+        startActivity(settingsIntent);
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+        finish();
     }
 
     public void returnHome(View v){
