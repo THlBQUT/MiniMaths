@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Quizz extends AppCompatActivity {
 
@@ -35,6 +36,8 @@ public class Quizz extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private Animation animSlideIn18;
     private CardView header18;
+    private boolean relativeDifficulty = false;
+    private int compteurRelative = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,11 @@ public class Quizz extends AppCompatActivity {
         Log.e("Quizz","Oncreate");
         setContentView(R.layout.activity_quizz);
         Bundle extras = getIntent().getExtras();
-        if(extras != null) {this.difficulty= extras.getString("DIFFICULTY");}
+        if(extras != null) {this.difficulty= extras.getString(Constantes.ID_DIFFICULTY_NAME_EXTRAS);}
+        if(Objects.equals(this.difficulty, Constantes.ID_DIFFICULTY_RELATIVE)) {
+            difficulty = Constantes.ID_DIFFICULTY_FACILE;
+            relativeDifficulty = true;
+        }
 
         preferences = getSharedPreferences("SHARED_PREF_MAIN", MODE_PRIVATE);
         editor = preferences.edit();
@@ -90,7 +97,7 @@ public class Quizz extends AppCompatActivity {
             }
             else{
                 int interval = (int) (Math.random() * 25) + 1;
-                int operation = (int) (Math.random() * 1);
+                int operation = (int) (Math.random() * 2);
                 if(operation == 1){
                     ((Button) buttonList.get(i)).setText(String.valueOf(equation.getResultat()+interval));
                 }
@@ -104,6 +111,11 @@ public class Quizz extends AppCompatActivity {
     public void checkButton(View view){
         if(view.getId() == buttonList.get(buttonChoose).getId()){
             this.actualScore++;
+            compteurRelative++;
+            if(relativeDifficulty){
+                if(compteurRelative == Constantes.lazerChangeDiffultyToHard || compteurRelative == Constantes.lazerChangeDiffultyToMedium)
+                    difficulty = equation.changeDifficultyUp(difficulty);
+            }
             Handler handler = new Handler();
             ((Button)view).setBackgroundColor(getColor(R.color.true_quizz));
             ImageView img = findViewById(R.id.TV);
@@ -135,6 +147,9 @@ public class Quizz extends AppCompatActivity {
             }
             else{
                 this.vies--;
+                if(relativeDifficulty){
+                    difficulty = equation.changeDifficultyDown(difficulty);
+                }
             }
             if (this.vies == 1) {
                 ImageView img = findViewById(R.id.heart3);

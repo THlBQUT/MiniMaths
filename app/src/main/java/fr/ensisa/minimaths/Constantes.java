@@ -5,6 +5,7 @@ public class Constantes {
     public static final String ID_DIFFICULTY_FACILE = "FACILE";
     public static final String ID_DIFFICULTY_MEDIUM = "MOYEN";
     public static final String ID_DIFFICULTY_DIFFICILE = "DIFFICILE";
+    public static final String ID_DIFFICULTY_RELATIVE = "RELATIVE";
 
     public static final String ID_DIFFICULTY_NAME_EXTRAS = "DIFFICULTY";
 
@@ -14,4 +15,10 @@ public class Constantes {
 
     public static final int SPEED_ANSWER_IA = 5000;
     public static final int PERCENTAGE_GOOD_ANSWER_IA = 85;
+
+    public static final int lazerChangeDiffultyToMedium = 6;
+    public static final int lazerChangeDiffultyToHard = 10;
+
+    public static final int quizChangeDiffultyToMedium = 6;
+    public static final int quizChangeDiffultyToHard = 12;
 }

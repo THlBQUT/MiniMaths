@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import fr.ensisa.minimaths.Constantes;
@@ -46,13 +47,18 @@ public class LazerBattle extends AppCompatActivity {
     private boolean finDePartie = false;
     private Thread thread;
     private float initialX;
+    private boolean relativeDifficulty = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lazer);
         Bundle extras = getIntent().getExtras();
-        if(extras != null) {this.difficulty= extras.getString("DIFFICULTY");}
+        if(extras != null) {this.difficulty= extras.getString(Constantes.ID_DIFFICULTY_NAME_EXTRAS);}
+        if(Objects.equals(this.difficulty, Constantes.ID_DIFFICULTY_RELATIVE)){
+            this.difficulty = Constantes.ID_DIFFICULTY_FACILE;
+            this.relativeDifficulty = true;
+        }
         this.equation = new Equation(difficulty);
 
         this.textView = this.findViewById((R.id.textlazer));
@@ -148,6 +154,10 @@ public class LazerBattle extends AppCompatActivity {
                                     victory();
                                     finDePartie = true;
                                 }
+                                if(relativeDifficulty){
+                                    if(compteur == Constantes.lazerChangeDiffultyToHard || compteur == Constantes.lazerChangeDiffultyToMedium)
+                                        difficulty = equation.changeDifficultyUp(difficulty);
+                                }
                             } else {
                                 Animation animShake = AnimationUtils.loadAnimation(LazerBattle.this, R.anim.shake);
                                 editText.startAnimation(animShake);
@@ -156,6 +166,9 @@ public class LazerBattle extends AppCompatActivity {
                                 combo.clearAnimation();
                                 combo.setVisibility(View.INVISIBLE);
                                 combo2.setVisibility(View.INVISIBLE);
+                                if(relativeDifficulty){
+                                    difficulty = equation.changeDifficultyDown(difficulty);
+                                }
                                 if(progress <= 0 && !finDePartie) {
                                     finDePartie = true;
                                     defeat.setVisibility(View.VISIBLE);
