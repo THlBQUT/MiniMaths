@@ -40,7 +40,7 @@ public class DefeatActivity extends AppCompatActivity {
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
         this.finish();
     }
-    public void backButton(View v){
+    public void goHome(View v){
         Intent home = new Intent(this, MainActivity.class);
         startActivity(home);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))

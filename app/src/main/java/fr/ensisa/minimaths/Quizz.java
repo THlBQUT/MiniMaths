@@ -144,6 +144,7 @@ public class Quizz extends AppCompatActivity {
                 Intent activityDefeat = new Intent(Quizz.this, QuizzDefeat.class);
                 activityDefeat.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, difficulty);
                 startActivity(activityDefeat);
+                this.finish();
             }
             else{
                 this.vies--;
