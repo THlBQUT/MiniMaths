@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -79,7 +80,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void draw(Canvas canvas)  {
         super.draw(canvas);
-        canvas.drawBitmap(BitmapFactory.decodeResource(this.getResources(), R.drawable.backgroundmeteorite), 0, 0, null);
+        canvas.drawBitmap(BitmapFactory.decodeResource(this.getResources(), R.drawable.backgroundmeteorite), null, new RectF(0, 0, screenWidth, screenHeight), null);
         Paint paint = new Paint();
         paint.setColor(Color.WHITE);
         paint.setTextSize(80);
