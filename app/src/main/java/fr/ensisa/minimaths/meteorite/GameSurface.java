@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -42,7 +43,6 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         // Make Game Surface focusable so it can handle events.
         this.setFocusable(true);
 
-        // Set callback.
         this.getHolder().addCallback(this);
     }
 
@@ -55,8 +55,11 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
             {
                 this.panel.collect(f.getValue());
             }
+            if(this.panel.getLife()==0)
+            {
+                System.exit(0);
+            }
         }
-
     }
 
     @Override
@@ -74,6 +77,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void draw(Canvas canvas)  {
         super.draw(canvas);
+        canvas.drawBitmap(BitmapFactory.decodeResource(this.getResources(), R.drawable.backgroundmeteorite), null, new RectF(0, 0, screenWidth, screenHeight), null);
         Paint paint = new Paint();
         paint.setColor(Color.WHITE);
         paint.setTextSize(80);

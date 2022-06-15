@@ -18,7 +18,7 @@ public class Player extends GameObject {
     private Bitmap[] rightToLefts;
 
     // Velocity of game character (pixel/millisecond)
-    public static final float VELOCITY = 20;
+    public static final float VELOCITY = 25;
 
     private int movingVectorX = 1;
     private int xStop;
