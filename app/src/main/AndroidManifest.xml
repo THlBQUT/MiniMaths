@@ -18,6 +18,9 @@
         android:theme="@style/Theme.MiniMaths"
         tools:targetApi="31">
         <activity
+            android:name=".LoadingGame"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
@@ -74,6 +77,10 @@
             android:name=".QuizzDefeat"
             android:exported="true"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".Ranking"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
