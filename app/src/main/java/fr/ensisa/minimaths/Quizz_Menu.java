@@ -24,7 +24,7 @@ public class Quizz_Menu extends AppCompatActivity {
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     private Vibrator vibrator;
-    private TextView ms_facile, np_facile, nv_facile, ms_moyen, np_moyen, nv_moyen, ms_difficile, np_difficile, nv_difficile;
+    private TextView ms_facile, np_facile, ms_moyen, np_moyen, ms_difficile, np_difficile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +45,6 @@ public class Quizz_Menu extends AppCompatActivity {
         np_facile = findViewById(R.id.quiz_nbParties_facile);
         np_moyen = findViewById(R.id.quiz_nbParties_moyen);
         np_difficile = findViewById(R.id.quiz_nbParties_difficile);
-        nv_facile = findViewById(R.id.quiz_nbVictoires_facile);
-        nv_moyen = findViewById(R.id.quiz_nbVictoires_moyen);
-        nv_difficile = findViewById(R.id.quiz_nbVictoires_difficile);
 
         ms_facile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_MS_FACILE", 0)));
         ms_moyen.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_MS_MOYEN", 0)));
@@ -55,9 +52,6 @@ public class Quizz_Menu extends AppCompatActivity {
         np_facile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_NP_FACILE", 0)));
         np_moyen.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_NP_MOYEN", 0)));
         np_difficile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_NP_DIFFICILE", 0)));
-        nv_facile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_NV_FACILE", 0)));
-        nv_moyen.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_NV_MOYEN", 0)));
-        nv_difficile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_NV_DIFFICILE", 0)));
 
         animSlideIn3 = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_down);
         animZoomIn9 = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_in);
@@ -75,6 +69,18 @@ public class Quizz_Menu extends AppCompatActivity {
         btn11.startAnimation(animZoomIn11);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Actualiser les scores lorsqu'on retourne sur la page de choix de la difficulté
+        ms_facile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_MS_FACILE", 0)));
+        ms_moyen.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_MS_MOYEN", 0)));
+        ms_difficile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_MS_DIFFICILE", 0)));
+        np_facile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_NP_FACILE", 0)));
+        np_moyen.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_NP_MOYEN", 0)));
+        np_difficile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_NP_DIFFICILE", 0)));
+    }
+
     public void goQuizzOnEasy(View v){
         Intent intent = new Intent(this, LoadingGame.class);
         intent.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, Constantes.ID_DIFFICULTY_FACILE);
@@ -82,6 +88,8 @@ public class Quizz_Menu extends AppCompatActivity {
         startActivity(intent);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+        editor.putInt("SHARED_PREF_MAIN_QUIZ_NP_FACILE",preferences.getInt("SHARED_PREF_MAIN_QUIZ_NP_FACILE", 0)+1);
+        editor.apply();
     }
 
     public void goQuizzOnMedium(View v){
@@ -91,6 +99,8 @@ public class Quizz_Menu extends AppCompatActivity {
         startActivity(intent);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+        editor.putInt("SHARED_PREF_MAIN_QUIZ_NP_MOYEN",preferences.getInt("SHARED_PREF_MAIN_QUIZ_NP_MOYEN", 0)+1);
+        editor.apply();
     }
     public void goQuizzOnHard(View v){
         Intent intent = new Intent(this, LoadingGame.class);
@@ -99,6 +109,8 @@ public class Quizz_Menu extends AppCompatActivity {
         startActivity(intent);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+        editor.putInt("SHARED_PREF_MAIN_QUIZ_NP_DIFFICILE",preferences.getInt("SHARED_PREF_MAIN_QUIZ_NP_DIFFICILE", 0)+1);
+        editor.apply();
     }
 
     public void goQuizzOnAuto(View v){

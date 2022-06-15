@@ -113,21 +113,21 @@ public class SoloGameList extends AppCompatActivity {
     }
 
     public void goToQuizzTip(View v) {
-        Toast viewToast = Toast.makeText(this, "Répondez aux divers calculs successifs posés dans le Quizz", Toast.LENGTH_LONG);
+        Toast viewToast = Toast.makeText(this, "Pris au piège dans son laboratoire, affrontez le professeur MicMath dans une série de questions enflammées ! Attention : l'erreur n’est pas une option !", Toast.LENGTH_LONG);
         viewToast.show();
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
     }
 
     public void goToLazerTip(View v) {
-        Toast viewToast = Toast.makeText(this, "Répondez aux calculs le plus rapidement possible pour remporter le duel", Toast.LENGTH_LONG);
+        Toast viewToast = Toast.makeText(this, "Seul ou en multijoueur, affrontez vos adversaires dans une bataille Lazer épique au milieu d’une arène retro et augmentez votre puissance grâce au mathématiques !\n", Toast.LENGTH_LONG);
         viewToast.show();
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
     }
 
     public void goToMeteorTip(View v) {
-        Toast viewToast = Toast.makeText(this, "Interceptez les météorites correctes pour résoudre le calcul proposé", Toast.LENGTH_LONG);
+        Toast viewToast = Toast.makeText(this, "Précision, rapidité et calcul, rattrapez les bonnes météorites pour obtenir le meilleur score et sauvez ce qu’il reste de cette ville détruite par le professeur MicMath.", Toast.LENGTH_LONG);
         viewToast.show();
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
