@@ -26,4 +26,9 @@ public class QuizzDefeat extends AppCompatActivity {
         startActivity(activityQuizz);
         this.finish();
     }
+    public void goHome(View v){
+        Intent activityLazer = new Intent(this, MainActivity.class);
+        startActivity(activityLazer);
+        this.finish();
+    }
 }

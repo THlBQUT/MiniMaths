@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import fr.ensisa.minimaths.Constantes;
+import fr.ensisa.minimaths.MainActivity;
 import fr.ensisa.minimaths.Quizz;
 import fr.ensisa.minimaths.R;
 
@@ -20,6 +21,11 @@ public class MeteorDefeat extends AppCompatActivity {
     public void RetryQuizz(View v){
         Intent activityMeteor = new Intent(this, MeteorActivity.class);
         startActivity(activityMeteor);
+        this.finish();
+    }
+    public void goHome(View v){
+        Intent activityLazer = new Intent(this, MainActivity.class);
+        startActivity(activityLazer);
         this.finish();
     }
 
