@@ -15,6 +15,7 @@ public class LoadingGame extends AppCompatActivity {
 
     private Animation animFadein;
     private CardView chargementCard;
+    private boolean abortTheMission=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +35,18 @@ public class LoadingGame extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(intent);
-                overridePendingTransition(R.anim.zoom_enter, android.R.anim.fade_out);
-                finish();
+                if(!abortTheMission) {
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.zoom_enter, android.R.anim.fade_out);
+                    finish();
+                }
             }
         },2000);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        this.abortTheMission = true;
     }
 }

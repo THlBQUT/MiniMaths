@@ -1,8 +1,10 @@
 package fr.ensisa.minimaths;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -97,6 +99,15 @@ public class SoloGameList extends AppCompatActivity {
         startActivity(activityMeteorite);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+    }
+
+    public void goToLabyrhinte(View v){
+        new AlertDialog.Builder(this)
+                .setTitle("Coming Soon")
+                .setMessage("Le professeur MicMath a semé la pagaille dans son laboratoire, le labyrhinte n'est pas soluble pour l'instant !")
+                .setPositiveButton(android.R.string.yes, null)
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .show();
     }
 
     public void goToQuizz(View v){

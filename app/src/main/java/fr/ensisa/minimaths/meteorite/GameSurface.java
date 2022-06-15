@@ -2,6 +2,7 @@ package fr.ensisa.minimaths.meteorite;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -11,16 +12,21 @@ import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import fr.ensisa.minimaths.MainActivity;
 import fr.ensisa.minimaths.R;
+import fr.ensisa.minimaths.lazerbattle.DefeatActivity;
+import fr.ensisa.minimaths.lazerbattle.LazerBattle;
 
 public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 
     private GameThread gameThread;
+    private MeteorActivity meteorActivity;
 
     private ChibiCharacter chibi1;
 
@@ -34,6 +40,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 
     public GameSurface(Context context)  {
         super(context);
+        this.meteorActivity = (MeteorActivity) context;
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -56,7 +63,11 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
                 this.panel.collect(f.getValue());
             }
         }
-
+        if(this.panel.getLife() == 0){
+            this.gameThread.setRunning(false);
+            this.meteorActivity.setGameOver();
+            System.exit(0);
+        }
     }
 
     @Override
