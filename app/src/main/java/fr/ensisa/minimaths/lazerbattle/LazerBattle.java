@@ -217,6 +217,7 @@ public class LazerBattle extends AppCompatActivity {
 
     private void clearGame(){
         finDePartie = true;
+        mp.stop();
         this.finish();
     }
 
@@ -340,7 +341,6 @@ public class LazerBattle extends AppCompatActivity {
             int previousWidthLazerBlue = this.lazerblue.getLayoutParams().width;
             this.lazerblue.getLayoutParams().width = (int) (this.lazerred.getLayoutParams().width * this.progress / 100);
             this.lazerblue.setX((float) (this.lazerred.getX()));
-//            this.lazerblue.setTranslationX(-this.lazerred.getLayoutParams().width * this.progress / 200);
             if(progress <=5)
                 this.lazershock.setX((int) this.player1.getX() + this.player1.getLayoutParams().width/2);
             else if(progress>=95)

@@ -266,7 +266,7 @@
               <TextView
                   android:id="@+id/lazer_meilleurScore_moyen"
                   android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
+                  android:layout_height="match_parent"
                   android:layout_weight="1"
                   android:text="0"
                   android:textColor="@color/black"
