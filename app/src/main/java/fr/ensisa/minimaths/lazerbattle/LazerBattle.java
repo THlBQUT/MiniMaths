@@ -3,8 +3,10 @@ package fr.ensisa.minimaths.lazerbattle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -30,9 +32,6 @@ public class LazerBattle extends AppCompatActivity {
     private TextView combo;
     private TextView combo2;
     private EditText editText;
-    private TextView victory;
-    private TextView defeat;
-    private Button retryButton;
     private ImageView background;
     private ImageView screen;
     private ImageView player1;
@@ -48,12 +47,19 @@ public class LazerBattle extends AppCompatActivity {
     private Thread thread;
     private float initialX;
     private boolean relativeDifficulty = false;
+    private MediaPlayer mp;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lazer);
         Bundle extras = getIntent().getExtras();
+
+        preferences = getSharedPreferences("SHARED_PREF_MAIN", MODE_PRIVATE);
+        editor = preferences.edit();
+
         if(extras != null) {this.difficulty= extras.getString(Constantes.ID_DIFFICULTY_NAME_EXTRAS);}
         if(Objects.equals(this.difficulty, Constantes.ID_DIFFICULTY_RELATIVE)){
             this.difficulty = Constantes.ID_DIFFICULTY_FACILE;
@@ -63,7 +69,6 @@ public class LazerBattle extends AppCompatActivity {
 
         this.textView = this.findViewById((R.id.textlazer));
         this.editText = this.findViewById(R.id.textinputlazer);
-        this.victory= this.findViewById(R.id.victory);
         this.background = this.findViewById(R.id.background_lazer);
         this.screen = this.findViewById(R.id.screen);
         this.player1 = this.findViewById(R.id.player1);
@@ -79,6 +84,8 @@ public class LazerBattle extends AppCompatActivity {
         this.lazerblue.getLayoutParams().width = this.lazerblue.getLayoutParams().width / 2;
         this.lazerblue.setTranslationX(-this.lazerblue.getLayoutParams().width / 2);
         this.lazerred.setX(this.player1.getX());
+
+        soundSetup();
 
         Runnable runnable = new Runnable() {
             private int compteuria = 0;
@@ -125,6 +132,7 @@ public class LazerBattle extends AppCompatActivity {
             }
         };
         thread = new Thread(runnable);
+        thread.start();
 
         this.editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -171,9 +179,7 @@ public class LazerBattle extends AppCompatActivity {
                                 }
                                 if(progress <= 0 && !finDePartie) {
                                     finDePartie = true;
-                                    defeat.setVisibility(View.VISIBLE);
                                     defeat();
-                                    retryButton.setVisibility(View.VISIBLE);
                                 }
                             }
                             uiUpdateLazer();
@@ -230,26 +236,8 @@ public class LazerBattle extends AppCompatActivity {
         lazerblue.setVisibility(visibility);
     }
 
-    public void skipIntro(View v){
-        if(!this.isIntroSkip) {
-            TextView intro2 = this.findViewById((R.id.lazerGame_intro_text2));
-            TextView intro1 = this.findViewById((R.id.lazerGame_intro_text1));
-            intro1.setVisibility(View.INVISIBLE);
-            intro2.setVisibility((View.INVISIBLE));
-            change_visibility(View.VISIBLE);
-            this.isIntroSkip = true;
-            thread.start();
-            playAnimation();
-        }
-        if(finDePartie){
-            change_visibility(View.INVISIBLE);
-            this.finish();
-        }
-    }
-
     private void defeat(){
         uiUpdateLazer();
-        TextView intro2 = this.findViewById((R.id.lazerGame_intro_text2));
         Animation animDead = AnimationUtils.loadAnimation(LazerBattle.this, R.anim.defeat_dead_left_character);
         animDead.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -271,6 +259,7 @@ public class LazerBattle extends AppCompatActivity {
                 Intent activityDefeat = new Intent(LazerBattle.this, DefeatActivity.class);
                 activityDefeat.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, difficulty);
                 startActivity(activityDefeat);
+                mp.stop();
             }
 
             @Override
@@ -283,7 +272,6 @@ public class LazerBattle extends AppCompatActivity {
 
     private  void victory() throws InterruptedException {
         uiUpdateLazer();
-        TextView intro2 = this.findViewById((R.id.lazerGame_intro_text2));
         Animation animDead = AnimationUtils.loadAnimation(LazerBattle.this, R.anim.victory_dead_right_character);
         animDead.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -299,12 +287,9 @@ public class LazerBattle extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                intro2.setText("Cliquer pour retourner à l'accueil");
-                intro2.setVisibility(View.VISIBLE);
                 change_visibility(View.INVISIBLE);
-                victory.setVisibility(View.VISIBLE);
-                retryButton.setVisibility(View.VISIBLE);
                 noLazerPrompt();
+                mp.stop();
             }
 
             @Override
@@ -313,13 +298,6 @@ public class LazerBattle extends AppCompatActivity {
             }
         });
         player2.startAnimation(animDead);
-    }
-
-    public void retry_button(View v){
-        Intent intent = new Intent(this, LazerBattle.class);
-        intent.putExtra("DIFFICULTY", this.difficulty);
-        startActivity(intent);
-        this.finish();
     }
 
     public void returnHome(View v){
@@ -389,5 +367,13 @@ public class LazerBattle extends AppCompatActivity {
         this.lazerred.clearAnimation();
         this.lazershock.clearAnimation();
         this.lazerblue.clearAnimation();
+    }
+
+    private void soundSetup(){
+        if (preferences.getBoolean("SHARED_PREF_MAIN_MUSIQUE", true)) {
+            this.mp = MediaPlayer.create(getApplicationContext(), R.raw.lazermp3);
+            this.mp.start();
+            this.mp.setLooping(true);
+        }
     }
 }
