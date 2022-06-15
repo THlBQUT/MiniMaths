@@ -21,7 +21,7 @@ public class Panel {
 
     public Panel()
     {
-        life=1;
+        life=3;
         generateEquation();
     }
 
