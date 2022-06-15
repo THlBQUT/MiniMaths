@@ -77,6 +77,21 @@ public class LazerBattleMenu extends AppCompatActivity {
         btn14.startAnimation(animZoomIn14);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Actualiser les scores lorsqu'on retourne sur la page de choix de la difficulté
+        ms_facile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_LAZER_MS_FACILE", 0)));
+        ms_moyen.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_LAZER_MS_MOYEN", 0)));
+        ms_difficile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_LAZER_MS_DIFFICILE", 0)));
+        np_facile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_LAZER_NP_FACILE", 0)));
+        np_moyen.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_LAZER_NP_MOYEN", 0)));
+        np_difficile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_LAZER_NP_DIFFICILE", 0)));
+        nv_facile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_LAZER_NV_FACILE", 0)));
+        nv_moyen.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_LAZER_NV_MOYEN", 0)));
+        nv_difficile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_LAZER_NV_DIFFICILE", 0)));
+    }
+
     public void goOnEasy(View v){
         Intent intent = new Intent(this, LoadingGame.class);
         intent.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, Constantes.ID_DIFFICULTY_FACILE);
@@ -84,6 +99,8 @@ public class LazerBattleMenu extends AppCompatActivity {
         startActivity(intent);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+        editor.putInt("SHARED_PREF_MAIN_LAZER_NP_FACILE",preferences.getInt("SHARED_PREF_MAIN_LAZER_NP_FACILE", 0)+1);
+        editor.apply();
     }
 
     public void goOnMedium(View v){
@@ -93,6 +110,8 @@ public class LazerBattleMenu extends AppCompatActivity {
         startActivity(intent);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+        editor.putInt("SHARED_PREF_MAIN_LAZER_NP_MOYEN",preferences.getInt("SHARED_PREF_MAIN_LAZER_NP_MOYEN", 0)+1);
+        editor.apply();
     }
     public void goOnHard(View v){
         Intent intent = new Intent(this, LoadingGame.class);
@@ -101,6 +120,8 @@ public class LazerBattleMenu extends AppCompatActivity {
         startActivity(intent);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+        editor.putInt("SHARED_PREF_MAIN_LAZER_NP_DIFFICILE",preferences.getInt("SHARED_PREF_MAIN_LAZER_NP_DIFFICILE", 0)+1);
+        editor.apply();
     }
 
     public void backButton(View v){
