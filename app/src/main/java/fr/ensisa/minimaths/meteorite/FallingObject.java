@@ -16,7 +16,7 @@ public class FallingObject extends GameObject{
     private int rowUsing = 0;
     private boolean isReady;
 
-    private ChibiCharacter player;
+    private Player player;
 
     private Panel panel;
     private Bitmap[] topToBottoms;
@@ -28,7 +28,7 @@ public class FallingObject extends GameObject{
 
     private static long lastSpawn=-1;
 
-    public FallingObject(GameSurface gameSurface, Bitmap image,ChibiCharacter player,Panel panel, int x, int y,int value) {
+    public FallingObject(GameSurface gameSurface, Bitmap image,Player player,Panel panel, int x, int y,int value) {
         super(image, 1, 4, x, y);
         this.gameSurface= gameSurface;
         this.player= player;
@@ -67,7 +67,7 @@ public class FallingObject extends GameObject{
     }
 
     public boolean isCollision(){
-        if (player.getY()<=this.y+100 && player.getY()>=this.y-100 && player.getX()<=this.x+64 && player.getX()>=this.x-64)
+        if (player.getY()<=this.y+100 && player.getY()>=this.y-100 && player.getX()<=this.x+100 && player.getX()>=this.x-100)
         {
             this.x=-200;
             this.y=-200;

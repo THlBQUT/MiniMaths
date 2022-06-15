@@ -3,7 +3,7 @@ package fr.ensisa.minimaths.meteorite;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
-public class ChibiCharacter extends GameObject {
+public class Player extends GameObject {
 
     private static final int ROW_RIGHT_TO_LEFT = 1;
     private static final int ROW_LEFT_TO_RIGHT = 2;
@@ -27,7 +27,7 @@ public class ChibiCharacter extends GameObject {
 
     private GameSurface gameSurface;
 
-    public ChibiCharacter(GameSurface gameSurface, Bitmap image, int x, int y) {
+    public Player(GameSurface gameSurface, Bitmap image, int x, int y) {
         super(image, 4, 3, x, y);
 
         this.gameSurface= gameSurface;
@@ -75,13 +75,14 @@ public class ChibiCharacter extends GameObject {
 
             if (this.x < 0) {
                 this.x = 0;
-                this.movingVectorX = -this.movingVectorX;
+                this.movingVectorX = 0;
+                isRunning=false;
             } else if (this.x > this.gameSurface.getWidth() - width) {
                 this.x = this.gameSurface.getWidth() - width;
-                this.movingVectorX = -this.movingVectorX;
+                this.movingVectorX = 0;
+                isRunning=false;
             }
 
-            // rowUsing
             if (movingVectorX > 0) this.rowUsing = ROW_LEFT_TO_RIGHT;
             else this.rowUsing = ROW_RIGHT_TO_LEFT;
         }
@@ -90,7 +91,6 @@ public class ChibiCharacter extends GameObject {
     public void draw(Canvas canvas)  {
         Bitmap bitmap = this.getCurrentMoveBitmap();
         canvas.drawBitmap(bitmap,x, y, null);
-        // Last draw time.
         this.lastDrawNanoTime= System.nanoTime();
     }
 
