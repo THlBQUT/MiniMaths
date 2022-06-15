@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.RectF;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -15,13 +14,13 @@ import android.view.SurfaceView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import fr.ensisa.minimaths.R;
 
 public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 
     private GameThread gameThread;
-    private MeteorActivity meteorActivity;
 
     private Player player;
 
@@ -35,7 +34,6 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 
     public GameSurface(Context context)  {
         super(context);
-        this.meteorActivity = (MeteorActivity) context;
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -58,11 +56,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
                 this.panel.collect(f.getValue());
             }
         }
-        if(this.panel.getLife() == 0){
-            this.gameThread.setRunning(false);
-            this.meteorActivity.setGameOver();
-            System.exit(0);
-        }
+
     }
 
     @Override
@@ -80,7 +74,6 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void draw(Canvas canvas)  {
         super.draw(canvas);
-        canvas.drawBitmap(BitmapFactory.decodeResource(this.getResources(), R.drawable.backgroundmeteorite), null, new RectF(0, 0, screenWidth, screenHeight), null);
         Paint paint = new Paint();
         paint.setColor(Color.WHITE);
         paint.setTextSize(80);

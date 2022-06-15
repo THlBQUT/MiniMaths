@@ -12,7 +12,7 @@ public class FallingObject extends GameObject{
     private static final int ROW_TOP_TO_BOTTOM = 0;
     private static final int SUM=1;
     private static final int PRODUCT_OPERATOR=2;
-    public static final float VELOCITY = 15;
+    public static final float VELOCITY = 30;
     private int rowUsing = 0;
     private boolean isReady;
 

@@ -47,7 +47,7 @@ public class GameThread extends Thread {
             System.out.print(" Wait Time="+ waitTime);
 
             try {
-                // Sleep.
+                // Sleep
                 this.sleep(waitTime);
             } catch(InterruptedException e)  {
 
