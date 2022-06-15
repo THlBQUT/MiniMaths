@@ -103,6 +103,15 @@ public class LazerBattleMenu extends AppCompatActivity {
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
     }
 
+    public void goOnEvolutive(View v){
+        Intent intent = new Intent(this, LoadingGame.class);
+        intent.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, Constantes.ID_DIFFICULTY_RELATIVE);
+        intent.putExtra("class", LazerBattle.class);
+        startActivity(intent);
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+    }
+
     public void backButton(View v){
         onBackPressed();
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))

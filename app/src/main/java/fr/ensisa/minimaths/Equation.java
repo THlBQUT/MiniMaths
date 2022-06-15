@@ -31,13 +31,10 @@ public class Equation {
                         generatorAdd(50);
                         break;
                     case 1:
-                        generatorSub(50);
+                        generatorSub(35);
                         break;
                     case 2:
-                        generatorMult(15);
-                        break;
-                    case 3:
-                        generatorDivi(20);
+                        generatorMult(10);
                         break;
                     default:
                         generator(difficulty);
@@ -47,13 +44,13 @@ public class Equation {
             case Constantes.ID_DIFFICULTY_MEDIUM:
                 switch (operation) {
                     case 0:
-                        generatorAdd(350);
+                        generatorAdd(250);
                         break;
                     case 1:
-                        generatorSub(350);
+                        generatorSub(200);
                         break;
                     case 2:
-                        generatorMult(25);
+                        generatorMult(20);
                         break;
                     case 3:
                         generatorDivi(60);
@@ -75,7 +72,7 @@ public class Equation {
                         generatorMult(50);
                         break;
                     case 3:
-                        generatorDivi(100);
+                        generatorDivi(120);
                         break;
                     default:
                         generator(difficulty);
@@ -133,5 +130,37 @@ public class Equation {
         equation += operandes.get(3);
         this.resultat = rand1 / rand2;
         this.equation += rand2;
+    }
+
+    public String changeDifficultyUp(String difficulty){
+        String newDifficulty;
+        switch (difficulty){
+            case Constantes.ID_DIFFICULTY_FACILE:
+                newDifficulty = Constantes.ID_DIFFICULTY_MEDIUM;
+                break;
+            case Constantes.ID_DIFFICULTY_MEDIUM:
+                newDifficulty = Constantes.ID_DIFFICULTY_DIFFICILE;
+                break;
+            default:
+                newDifficulty = Constantes.ID_DIFFICULTY_FACILE;
+                break;
+        }
+        return newDifficulty;
+    }
+
+    public String changeDifficultyDown(String difficulty){
+        String newDifficulty;
+        switch (difficulty){
+            case Constantes.ID_DIFFICULTY_MEDIUM:
+                newDifficulty = Constantes.ID_DIFFICULTY_FACILE;
+                break;
+            case Constantes.ID_DIFFICULTY_DIFFICILE:
+                newDifficulty = Constantes.ID_DIFFICULTY_MEDIUM;
+                break;
+            default:
+                newDifficulty = Constantes.ID_DIFFICULTY_DIFFICILE;
+                break;
+        }
+        return newDifficulty;
     }
 }
