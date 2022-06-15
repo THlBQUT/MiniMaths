@@ -43,7 +43,7 @@ public class Settings extends AppCompatActivity {
     private String pseudo;
     private EditText editPseudo;
     private Vibrator vibrator;
-    private CircleImageView img = findViewById(R.id.imgAccount);
+    private CircleImageView img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +97,7 @@ public class Settings extends AppCompatActivity {
                 editor.apply();
             }
         });
+        img = findViewById(R.id.imgAccount);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail().requestProfile().build();

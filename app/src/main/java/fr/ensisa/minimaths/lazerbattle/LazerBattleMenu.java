@@ -18,6 +18,7 @@ import fr.ensisa.minimaths.Constantes;
 import fr.ensisa.minimaths.LoadingGame;
 import fr.ensisa.minimaths.MainActivity;
 import fr.ensisa.minimaths.R;
+import fr.ensisa.minimaths.Ranking;
 import fr.ensisa.minimaths.Settings;
 
 public class LazerBattleMenu extends AppCompatActivity {
@@ -152,6 +153,14 @@ public class LazerBattleMenu extends AppCompatActivity {
         onBackPressed();
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+    }
+
+    public void goToRanking(View v){
+        Intent ranking = new Intent(this, Ranking.class);
+        startActivity(ranking);
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+        finish();
     }
 
     public void goToHome(View v){
