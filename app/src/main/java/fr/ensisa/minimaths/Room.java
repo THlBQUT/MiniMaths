@@ -17,4 +17,6 @@ public class Room {
     public String getDifficulty() {
         return difficulty;
     }
+
+    public Room getRoom(){return this;}
 }

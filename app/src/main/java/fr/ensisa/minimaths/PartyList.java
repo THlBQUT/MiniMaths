@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,19 +47,23 @@ public class PartyList extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.rvRoom);
         Bundle extras = getIntent().getExtras();
         if(extras != null) {this.difficulty= extras.getString(Constantes.ID_DIFFICULTY_NAME_EXTRAS);}
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         roomAdapter = new RoomAdapter(this, roomList);
         recyclerView.setAdapter(roomAdapter);
+
+        for(Room r : roomList){
+            Log.e("ROOM ", r.getName());
+        }
+        Log.e("ROOM SIZE ON CREATE", String.valueOf(roomList.size()));
 
         database = FirebaseDatabase.getInstance("https://minimaths-84e80-default-rtdb.europe-west1.firebasedatabase.app/");
         reference = database.getReference("multiplayer_room/");
         reference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                for (DataSnapshot child: snapshot.getChildren()) {
-                    roomList.add(new Room(snapshot.getKey(), (String) snapshot.child("difficulty").getValue()));
-                }
+                Log.e("ADDED ONE ",snapshot.getKey());
+                roomList.add(new Room(snapshot.getKey(), (String) snapshot.child("difficulty").getValue()));
+                roomAdapter.notifyItemInserted(roomList.size()-1);
                 Log.e("RoomList size ", String.valueOf(roomList.size()));
                 roomAdapter.notifyDataSetChanged();
             }
@@ -78,6 +83,9 @@ public class PartyList extends AppCompatActivity {
                 }
                 if(index != -1) roomList.remove(index);
                 roomAdapter.notifyItemRemoved(index);
+                for ( Room r : roomList){
+                    Log.e("Room :" , r.getName());
+                }
             }
 
             @Override
@@ -97,6 +105,7 @@ public class PartyList extends AppCompatActivity {
         else{
             playerName = "Guest";
         }
+        Log.e("Creating", "New entry inside roomList");
         reference = database.getReference("multiplayer_room/" + playerName);
         reference.get().addOnCompleteListener(task1 ->{
             if(task1.getResult().getValue() == null){

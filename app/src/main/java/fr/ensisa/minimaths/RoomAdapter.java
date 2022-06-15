@@ -74,6 +74,13 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ViewHolder> {
         @Override
         public void onClick(View view) {
             Log.e("Click on :",roomName.getText() + " : OK \r\n" + "difficulty : " + roomDifficulty.getText());
+            int position = -1;
+            for (int i = 0; i < mData.size(); i++){
+                if (roomName.getText().equals(mData.get(i).getName())){
+                    position = i;
+                }
+            }
+            Log.e("Position", String.valueOf(position));
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
         }
     }
