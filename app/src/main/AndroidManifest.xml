@@ -26,6 +26,9 @@
             android:name=".PartyList"
             android:exported="false" />
         <activity
+            android:name=".LoadingMultiplayer"
+            android:exported="false" />
+        <activity
             android:name=".MultiDifficulty"
             android:exported="false" />
         <activity

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -99,8 +100,14 @@ public class PartyList extends AppCompatActivity {
         reference = database.getReference("multiplayer_room/" + playerName);
         reference.get().addOnCompleteListener(task1 ->{
             if(task1.getResult().getValue() == null){
-                DatabaseReference child2 = reference.child("difficulty");
-                child2.setValue(difficulty.toLowerCase());
+                DatabaseReference child = reference.child("difficulty");
+                child.setValue(difficulty.toLowerCase());
+                DatabaseReference dbRef = reference.child("isReady");
+                dbRef.setValue(false);
+                Intent loading = new Intent(this, LoadingMultiplayer.class);
+                loading.putExtra("ID_PARTY", playerName);
+                loading.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS,difficulty);
+                startActivity(loading);
             }
             else {
                 Toast.makeText(this, "Une room a votre nom existe deja", Toast.LENGTH_LONG).show();
