@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import fr.ensisa.minimaths.lazerbattle.LazerBattleMenu;
 import fr.ensisa.minimaths.meteorite.MeteorActivity;
+import fr.ensisa.minimaths.meteorite.MeteorMenu;
 
 public class SoloGameList extends AppCompatActivity {
 
@@ -80,6 +81,14 @@ public class SoloGameList extends AppCompatActivity {
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
     }
 
+    public void goToRanking(View v){
+        Intent ranking = new Intent(this, Ranking.class);
+        startActivity(ranking);
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+        finish();
+    }
+
     public void goToSettings(View v){
         Intent settingsIntent = new Intent(this, Settings.class);
         startActivity(settingsIntent);
@@ -95,7 +104,7 @@ public class SoloGameList extends AppCompatActivity {
     }
 
     public void goToMeteorite(View v){
-        Intent activityMeteorite = new Intent(this, MeteorActivity.class);
+        Intent activityMeteorite = new Intent(this, MeteorMenu.class);
         startActivity(activityMeteorite);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));

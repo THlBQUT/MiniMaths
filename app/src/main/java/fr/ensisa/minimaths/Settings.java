@@ -159,6 +159,8 @@ public class Settings extends AppCompatActivity {
                         editor.remove("SHARED_PREF_MAIN_QUIZ_NP_MOYEN");
                         editor.remove("SHARED_PREF_MAIN_QUIZ_NP_DIFFICILE");
                         editor.remove("SHARED_PREF_MAIN_QUIZ_NP_AUTO");
+                        editor.remove("SHARED_PREF_MAIN_METEORITE_MS");
+                        editor.remove("SHARED_PREF_MAIN_METEORITE_NP");
                         editor.apply();
                     }
                 })
