@@ -11,11 +11,11 @@ import fr.ensisa.minimaths.R;
 import fr.ensisa.minimaths.lazerbattle.LazerBattle;
 import fr.ensisa.minimaths.lazerbattle.LazerBattleMenu;
 
-public class DefeatActivity extends AppCompatActivity {
+public class WinActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gameoverlazer);
+        setContentView(R.layout.activity_lazerwin);
     }
 
     public void RetryLazer(View v){

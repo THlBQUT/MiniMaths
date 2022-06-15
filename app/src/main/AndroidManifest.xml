@@ -87,6 +87,10 @@
             android:name=".Ranking"
             android:exported="false"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".lazerbattle.WinActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

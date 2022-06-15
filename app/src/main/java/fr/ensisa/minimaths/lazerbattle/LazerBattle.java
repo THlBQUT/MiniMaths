@@ -290,6 +290,9 @@ public class LazerBattle extends AppCompatActivity {
                 change_visibility(View.INVISIBLE);
                 noLazerPrompt();
                 mp.stop();
+                Intent activityWin = new Intent(LazerBattle.this, WinActivity.class);
+                activityWin.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, difficulty);
+                startActivity(activityWin);
             }
 
             @Override
