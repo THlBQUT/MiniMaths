@@ -10,6 +10,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import fr.ensisa.minimaths.Constantes;
+import fr.ensisa.minimaths.MainActivity;
 import fr.ensisa.minimaths.R;
 import fr.ensisa.minimaths.lazerbattle.LazerBattle;
 import fr.ensisa.minimaths.lazerbattle.LazerBattleMenu;
@@ -40,7 +41,8 @@ public class DefeatActivity extends AppCompatActivity {
         this.finish();
     }
     public void backButton(View v){
-        onBackPressed();
+        Intent home = new Intent(this, MainActivity.class);
+        startActivity(home);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
         finish();

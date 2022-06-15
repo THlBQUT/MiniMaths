@@ -39,7 +39,8 @@ public class MeteorDefeat extends AppCompatActivity {
     }
 
     public void backButton(View v){
-        onBackPressed();
+        Intent home = new Intent(this, MainActivity.class);
+        startActivity(home);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
         finish();
