@@ -120,7 +120,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Pseudo"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="@color/white" />
         </LinearLayout>
 
         <LinearLayout
@@ -165,7 +166,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Thème interface"
-                android:textColor="@color/text_main_color"
+                android:textColor="@color/white"
                 android:textSize="17sp" />
 
             <Spinner
@@ -183,6 +184,7 @@
             android:layout_marginHorizontal="50dp"
             android:layout_marginVertical="10dp"
             android:text="Musique"
+            android:textColor="@color/white"
             android:textSize="17sp"
             android:theme="@style/SwitchTheme" />
 
@@ -193,6 +195,7 @@
             android:layout_marginHorizontal="50dp"
             android:layout_marginVertical="10dp"
             android:text="Vibrations"
+            android:textColor="@color/white"
             android:textSize="17sp"
             android:theme="@style/SwitchTheme" />
 
@@ -202,6 +205,7 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="50dp"
             android:layout_marginVertical="10dp"
+            android:onClick="reinitPopup"
             android:orientation="horizontal">
 
             <TextView
@@ -209,7 +213,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Réinitialiser score"
-                android:textColor="@color/text_main_color"
+                android:textColor="@color/white"
                 android:textSize="17sp" />
 
             <ImageButton
@@ -268,7 +272,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Connexion google"
-                android:textColor="@color/text_main_color"
+                android:textColor="@color/white"
                 android:textSize="17sp" />
 
             <ImageButton
@@ -297,7 +301,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Crédits"
-                android:textColor="@color/text_main_color"
+                android:textColor="@color/white"
                 android:textSize="17sp" />
 
             <ImageButton

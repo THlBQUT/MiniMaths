@@ -1,5 +1,6 @@
 package fr.ensisa.minimaths;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,12 +12,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -40,6 +43,7 @@ public class Settings extends AppCompatActivity {
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     private Switch musique, vibration;
+    private LinearLayout reinit;
     private String pseudo;
     private EditText editPseudo;
     private Vibrator vibrator;
@@ -127,6 +131,40 @@ public class Settings extends AppCompatActivity {
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
         finish();
+    }
+
+    public void reinitPopup(View v){
+        new AlertDialog.Builder(this)
+                .setTitle("Réinitialiser les scores")
+                .setMessage("Voulez vous réinitialiser tous les scores ?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        editor.remove("SHARED_PREF_MAIN_LAZER_MS_FACILE");
+                        editor.remove("SHARED_PREF_MAIN_LAZER_MS_MOYEN");
+                        editor.remove("SHARED_PREF_MAIN_LAZER_MS_DIFFICILE");
+                        editor.remove("SHARED_PREF_MAIN_LAZER_MS_AUTO");
+                        editor.remove("SHARED_PREF_MAIN_LAZER_NP_FACILE");
+                        editor.remove("SHARED_PREF_MAIN_LAZER_NP_MOYEN");
+                        editor.remove("SHARED_PREF_MAIN_LAZER_NP_DIFFICILE");
+                        editor.remove("SHARED_PREF_MAIN_LAZER_NP_AUTO");
+                        editor.remove("SHARED_PREF_MAIN_LAZER_NV_FACILE");
+                        editor.remove("SHARED_PREF_MAIN_LAZER_NV_MOYEN");
+                        editor.remove("SHARED_PREF_MAIN_LAZER_NV_DIFFICILE");
+                        editor.remove("SHARED_PREF_MAIN_LAZER_NV_AUTO");
+                        editor.remove("SHARED_PREF_MAIN_QUIZ_MS_FACILE");
+                        editor.remove("SHARED_PREF_MAIN_QUIZ_MS_MOYEN");
+                        editor.remove("SHARED_PREF_MAIN_QUIZ_MS_DIFFICILE");
+                        editor.remove("SHARED_PREF_MAIN_QUIZ_MS_AUTO");
+                        editor.remove("SHARED_PREF_MAIN_QUIZ_NP_FACILE");
+                        editor.remove("SHARED_PREF_MAIN_QUIZ_NP_MOYEN");
+                        editor.remove("SHARED_PREF_MAIN_QUIZ_NP_DIFFICILE");
+                        editor.remove("SHARED_PREF_MAIN_QUIZ_NP_AUTO");
+                        editor.apply();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     public void showCredits(View v) {

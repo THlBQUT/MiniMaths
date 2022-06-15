@@ -136,7 +136,7 @@
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColorHint="#C3C3C3"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
