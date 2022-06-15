@@ -125,8 +125,8 @@
 
     <TextView
         android:id="@+id/textlazer"
-        android:layout_width="105dp"
-        android:layout_height="56dp"
+        android:layout_width="127dp"
+        android:layout_height="81dp"
         android:foregroundGravity="center"
         android:gravity="center"
         android:text="TextView"
@@ -139,7 +139,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/background_lazer"
-        app:layout_constraintVertical_bias="0.429"
+        app:layout_constraintVertical_bias="0.396"
         tools:visibility="visible" />
 
     <TextView
