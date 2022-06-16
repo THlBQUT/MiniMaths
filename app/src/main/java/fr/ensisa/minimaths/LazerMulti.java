@@ -313,6 +313,7 @@ public class LazerMulti extends AppCompatActivity {
                 Intent activityDefeat = new Intent(LazerMulti.this, DefeatActivity.class);
                 activityDefeat.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, difficulty);
                 startActivity(activityDefeat);
+                overridePendingTransition(0, R.anim.zoom_exit);
 
                 String nomParametresMS = "SHARED_PREF_MAIN_LAZER_MS_" + difficulty;
                 if (compteurMax > preferences.getInt(nomParametresMS, 0)){
@@ -359,6 +360,7 @@ public class LazerMulti extends AppCompatActivity {
                 Intent activityWin = new Intent(LazerMulti.this, WinActivity.class);
                 activityWin.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, difficulty);
                 startActivity(activityWin);
+                overridePendingTransition(0, R.anim.zoom_exit);
 
                 String nomParametresMS = "SHARED_PREF_MAIN_LAZER_MS_" + difficulty;
                 String nomParametresNV = "SHARED_PREF_MAIN_LAZER_NV_" + difficulty;

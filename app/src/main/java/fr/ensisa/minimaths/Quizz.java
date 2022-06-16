@@ -144,6 +144,8 @@ public class Quizz extends AppCompatActivity {
                 Intent activityDefeat = new Intent(Quizz.this, QuizzDefeat.class);
                 activityDefeat.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, difficulty);
                 startActivity(activityDefeat);
+                overridePendingTransition(0, R.anim.zoom_exit);
+
                 String nomParametres = "SHARED_PREF_MAIN_QUIZ_MS_" + difficulty;
                 if (actualScore > preferences.getInt(nomParametres, 0)){
                     editor.putInt(nomParametres, actualScore);
