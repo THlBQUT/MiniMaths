@@ -5,6 +5,7 @@ import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -36,6 +37,7 @@ public class Quizz extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private Animation animSlideIn18;
     private CardView header18;
+    private MediaPlayer mp;
     private boolean relativeDifficulty = false;
     private int compteurRelative = 0;
 
@@ -69,6 +71,8 @@ public class Quizz extends AppCompatActivity {
         buttonList.add(this.findViewById(R.id.button2));
         buttonList.add(this.findViewById(R.id.button3));
         buttonList.add(this.findViewById(R.id.button4));
+
+        soundSetup();
 
         actualScore = 0;
         game();
@@ -151,6 +155,7 @@ public class Quizz extends AppCompatActivity {
                     editor.putInt(nomParametres, actualScore);
                     editor.apply();
                 }
+                mp.stop();
                 this.finish();
             }
             else{
@@ -170,6 +175,25 @@ public class Quizz extends AppCompatActivity {
             ((Button)view).setBackgroundColor(getColor(R.color.false_quizz));
         }
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mp.stop();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mp.stop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mp.stop();
+    }
+
     public void goToHome(View v){
         Intent home = new Intent(this, MainActivity.class);
         startActivity(home);
@@ -196,5 +220,13 @@ public class Quizz extends AppCompatActivity {
         onBackPressed();
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+    }
+
+    private void soundSetup(){
+        if (preferences.getBoolean("SHARED_PREF_MAIN_MUSIQUE", true)) {
+            this.mp = MediaPlayer.create(getApplicationContext(), R.raw.quizmp3);
+            this.mp.start();
+            this.mp.setLooping(true);
+        }
     }
 }
