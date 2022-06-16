@@ -38,6 +38,7 @@ public class LazerBattle extends AppCompatActivity {
     private ImageView background, screen, player1, player2, lazerred, lazerblue, lazershock;
     private Equation equation;
     private int compteur = 0;
+    private int compteurMax = 0;
     private String difficulty = Constantes.DEFAULT_DIFFICULTY;
     private boolean isIntroSkip = false;
     private boolean finDePartie = false;
@@ -181,6 +182,8 @@ public class LazerBattle extends AppCompatActivity {
                                     defeat();
                                 }
                             }
+                            if (compteur > compteurMax)
+                                compteurMax = compteur;
                             uiUpdateLazer();
                             return true;
                         } catch (NumberFormatException e) {
@@ -259,6 +262,12 @@ public class LazerBattle extends AppCompatActivity {
                 Intent activityDefeat = new Intent(LazerBattle.this, DefeatActivity.class);
                 activityDefeat.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, difficulty);
                 startActivity(activityDefeat);
+
+                String nomParametresMS = "SHARED_PREF_MAIN_LAZER_MS_" + difficulty;
+                if (compteurMax > preferences.getInt(nomParametresMS, 0)){
+                    editor.putInt(nomParametresMS, compteurMax);
+                    editor.apply();
+                }
                 mp.stop();
             }
 
@@ -268,6 +277,7 @@ public class LazerBattle extends AppCompatActivity {
             }
         });
         player1.startAnimation(animDead);
+
     }
 
     private  void victory() throws InterruptedException {
@@ -293,6 +303,14 @@ public class LazerBattle extends AppCompatActivity {
                 Intent activityWin = new Intent(LazerBattle.this, WinActivity.class);
                 activityWin.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, difficulty);
                 startActivity(activityWin);
+                String nomParametresMS = "SHARED_PREF_MAIN_LAZER_MS_" + difficulty;
+                String nomParametresNV = "SHARED_PREF_MAIN_LAZER_NV_" + difficulty;
+                if (compteurMax > preferences.getInt(nomParametresMS, 0)){
+                    editor.putInt(nomParametresMS, compteurMax);
+                    editor.apply();
+                }
+                editor.putInt(nomParametresNV,preferences.getInt(nomParametresNV, 0)+1);
+                editor.apply();
             }
 
             @Override
