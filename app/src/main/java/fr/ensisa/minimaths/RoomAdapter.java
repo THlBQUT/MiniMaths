@@ -96,6 +96,9 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ViewHolder> {
                 @Override
                 public void run() {
                     reference.child("isReady").setValue(true);
+                    Log.e("Reference :", reference.getKey());
+                    reference.setValue(null);
+                    Log.e("Reference :", reference.getKey());
                     context.finish();
                 }
             },2000);
