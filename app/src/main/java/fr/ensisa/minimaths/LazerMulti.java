@@ -330,7 +330,10 @@ public class LazerMulti extends AppCompatActivity {
 
             }
         });
-        player1.startAnimation(animDead);
+        if(Objects.equals(role, "HOST"))
+            player1.startAnimation(animDead);
+        else
+            player2.startAnimation(animDead);
     }
 
     private  void victory() throws InterruptedException {
@@ -378,7 +381,10 @@ public class LazerMulti extends AppCompatActivity {
 
             }
         });
-        player2.startAnimation(animDead);
+        if(Objects.equals(role, "HOST"))
+            player2.startAnimation(animDead);
+        else
+            player1.startAnimation(animDead);
     }
 
     public void backButton(View v){
