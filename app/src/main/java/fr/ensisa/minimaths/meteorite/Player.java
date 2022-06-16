@@ -7,7 +7,7 @@ public class Player extends GameObject {
 
     private static final int ROW_RIGHT_TO_LEFT = 1;
     private static final int ROW_LEFT_TO_RIGHT = 2;
-    // Row index of Image are being used.
+
     private int rowUsing = ROW_LEFT_TO_RIGHT;
 
     private int colUsing;
@@ -17,7 +17,6 @@ public class Player extends GameObject {
     private Bitmap[] leftToRights;
     private Bitmap[] rightToLefts;
 
-    // Velocity of game character (pixel/millisecond)
     public static final float VELOCITY = 25;
 
     private int movingVectorX = 1;
