@@ -105,8 +105,8 @@
                 android:layout_height="127dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
+                android:onClick="createRank"
                 android:scaleType="fitCenter"
-                android:onClick="clearRankLayout"
                 android:src="@drawable/multi_mathquiz_button" />
 
             <ImageButton
@@ -135,18 +135,10 @@
             android:layout_marginBottom="20dp"
             android:orientation="vertical">
 
-            <ScrollView
+            <ListView
+                android:id="@+id/listRank"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <LinearLayout
-                    android:id="@+id/rank"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" />
-            </ScrollView>
+                android:layout_height="match_parent" />
         </LinearLayout>
 
 

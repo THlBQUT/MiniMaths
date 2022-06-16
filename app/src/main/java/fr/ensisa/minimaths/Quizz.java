@@ -19,6 +19,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -40,6 +43,8 @@ public class Quizz extends AppCompatActivity {
     private MediaPlayer mp;
     private boolean relativeDifficulty = false;
     private int compteurRelative = 0;
+    private DatabaseReference reference;
+    private FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,6 +158,9 @@ public class Quizz extends AppCompatActivity {
                 String nomParametres = "SHARED_PREF_MAIN_QUIZ_MS_" + difficulty;
                 if (actualScore > preferences.getInt(nomParametres, 0)){
                     editor.putInt(nomParametres, actualScore);
+                    database = FirebaseDatabase.getInstance("https://minimaths-84e80-default-rtdb.europe-west1.firebasedatabase.app/");
+                    reference = database.getReference("user/" + preferences.getString("SHARED_PREF_MAIN_PSEUDO", "Invite"));
+                    reference.child(difficulty).setValue(String.valueOf(actualScore));
                     editor.apply();
                 }
                 mp.stop();

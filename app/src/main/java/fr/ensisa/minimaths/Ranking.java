@@ -1,5 +1,7 @@
 package fr.ensisa.minimaths;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,19 +9,34 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.xmlpull.v1.XmlPullParser;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class Ranking extends AppCompatActivity {
 
-    private LinearLayout rankLayout;
+    private ListView rankLayout;
     private Vibrator vibrator;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
+    private DatabaseReference reference;
+    private FirebaseDatabase database;
+    private long userCount = -1;
+    private ArrayList<String> userListID = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,37 +47,23 @@ public class Ranking extends AppCompatActivity {
         editor = preferences.edit();
         vibrator = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
 
-        this.rankLayout = this.findViewById(R.id.rank);
-
-        createRank();
+        this.rankLayout = this.findViewById(R.id.listRank);
     }
 
-    public void clearRankLayout(View v) {
-        this.rankLayout.removeAllViews();
+    public void createRank(View v) {
+        database = FirebaseDatabase.getInstance("https://minimaths-84e80-default-rtdb.europe-west1.firebasedatabase.app/");
+        reference = database.getReference("user/");
+        DatabaseReference user = database.getReference("user");
+        user.get().addOnCompleteListener(task -> userCount = task.getResult().getChildrenCount());
+        if(userCount != -1) Log.e("NB OF USER ", String.valueOf(userCount));
+        user.get().addOnCompleteListener(task -> {
+            Iterable<DataSnapshot> datasnapshot = task.getResult().getChildren();
+            while ( datasnapshot.iterator().hasNext() ){
+                userListID.add(datasnapshot.iterator().next().getKey());
+            }
+        });
     }
 
-    private void createOneRow() {
-        LinearLayout parent = new LinearLayout(this);
-        parent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        parent.setOrientation(LinearLayout.HORIZONTAL);
-
-        TextView playerName = new TextView(this);
-        TextView score = new TextView(this);
-
-        playerName.setText("Pseudo du joueur ici");
-        score.setText("et son score");
-
-        parent.addView(playerName);
-        parent.addView(score);
-
-        this.rankLayout.addView(parent);
-    }
-
-    private void createRank() {
-        for(int i=0; i<50; i++){
-            createOneRow();
-        }
-    }
     public void goToHome(View v){
         Intent home = new Intent(this, MainActivity.class);
         startActivity(home);
