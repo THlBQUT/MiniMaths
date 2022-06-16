@@ -15,13 +15,13 @@ import android.view.SurfaceView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import fr.ensisa.minimaths.R;
 
 public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 
     private GameThread gameThread;
-    private MeteorActivity meteorActivity;
 
     private Player player;
 
@@ -35,7 +35,6 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 
     public GameSurface(Context context)  {
         super(context);
-        this.meteorActivity = (MeteorActivity) context;
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -44,7 +43,6 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         // Make Game Surface focusable so it can handle events.
         this.setFocusable(true);
 
-        // Set callback.
         this.getHolder().addCallback(this);
     }
 
@@ -57,11 +55,10 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
             {
                 this.panel.collect(f.getValue());
             }
-        }
-        if(this.panel.getLife() == 0){
-            this.gameThread.setRunning(false);
-            this.meteorActivity.setGameOver();
-            System.exit(0);
+            if(this.panel.getLife()==0)
+            {
+                System.exit(0);
+            }
         }
     }
 

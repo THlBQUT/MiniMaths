@@ -13,6 +13,7 @@ import fr.ensisa.minimaths.Constantes;
 import fr.ensisa.minimaths.MainActivity;
 import fr.ensisa.minimaths.Quizz;
 import fr.ensisa.minimaths.R;
+import fr.ensisa.minimaths.SoloGameList;
 
 public class MeteorDefeat extends AppCompatActivity {
 
@@ -31,7 +32,7 @@ public class MeteorDefeat extends AppCompatActivity {
     }
 
     public void RetryMeteor(View v){
-        Intent activityMeteor = new Intent(this, MeteorActivity.class);
+        Intent activityMeteor = new Intent(this, SoloGameList.class);
         startActivity(activityMeteor);
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));

@@ -67,15 +67,6 @@ public class Panel {
                 }
             }
         }
-        else
-            if(operator==this.PRODUCT) {
-            if (this.n1 + this.n2 == this.res) {
-                score++;
-                generateEquation();
-            } else {
-                life--;
-            }
-        }
     }
     public void generateEquation()
     {

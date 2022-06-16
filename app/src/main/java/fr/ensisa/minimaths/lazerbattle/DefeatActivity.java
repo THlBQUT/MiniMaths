@@ -39,6 +39,7 @@ public class DefeatActivity extends AppCompatActivity {
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
         this.finish();
+
     }
     public void goHome(View v){
         Intent home = new Intent(this, MainActivity.class);
