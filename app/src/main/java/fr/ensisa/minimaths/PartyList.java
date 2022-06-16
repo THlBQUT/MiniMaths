@@ -3,12 +3,15 @@ package fr.ensisa.minimaths;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.Preference;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SharedMemory;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -106,7 +109,8 @@ public class PartyList extends AppCompatActivity {
         if(account != null)
             playerName = account.getDisplayName();
         else{
-            playerName = "Guest";
+            SharedPreferences preferences = getSharedPreferences("SHARED_PREF_MAIN", MODE_PRIVATE);
+            playerName = preferences.getString("SHARED_PREF_MAIN_PSEUDO", "Guest");
         }
         Log.e("Creating", "New entry inside roomList");
         reference = database.getReference("multiplayer_room/" + playerName);
