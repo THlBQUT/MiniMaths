@@ -205,7 +205,7 @@ public class LazerMulti extends AppCompatActivity {
                             } else {
                                 Animation animShake = AnimationUtils.loadAnimation(LazerMulti.this, R.anim.shake);
                                 editText.startAnimation(animShake);
-                                progress = progress - Constantes.MULTIPLIER_LAZER_BATTLE_FIGHT;
+                                progress = progress - determineIfHostOrGuest * Constantes.MULTIPLIER_LAZER_BATTLE_FIGHT;
                                 if(Objects.equals(role, "HOST")){compteur1 = 0;}
                                 else{compteur2 = 0;}
                                 combo.clearAnimation();
