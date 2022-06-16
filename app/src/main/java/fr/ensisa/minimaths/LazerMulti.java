@@ -153,8 +153,10 @@ public class LazerMulti extends AppCompatActivity {
                         }
                     }
                 }
-                if (compteur1 > compteurMax)
+                if (role.equals("HOST") && compteur1 > compteurMax)
                     compteurMax = (int)compteur1;
+                if (role.equals("GUEST") && compteur2 > compteurMax)
+                    compteurMax = (int)compteur2;
             }
 
             @Override
