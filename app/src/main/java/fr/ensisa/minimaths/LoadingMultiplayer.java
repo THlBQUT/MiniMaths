@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Objects;
+
 public class LoadingMultiplayer extends AppCompatActivity {
 
     private Animation animFadein;
@@ -26,7 +29,8 @@ public class LoadingMultiplayer extends AppCompatActivity {
     private DatabaseReference reference;
     private FirebaseDatabase database;
     private String roomName;
-    private String difficulte;
+    private String difficulty;
+    private String role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,8 @@ public class LoadingMultiplayer extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
             roomName = extras.getString("ID_PARTY");
-            difficulte = extras.getString(Constantes.ID_DIFFICULTY_NAME_EXTRAS);
+            difficulty = extras.getString(Constantes.ID_DIFFICULTY_NAME_EXTRAS);
+            role = extras.getString("ROLE");
         }
 
         chargementCard = findViewById(R.id.texte_chargement);
@@ -54,8 +59,32 @@ public class LoadingMultiplayer extends AppCompatActivity {
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 if( snapshot.getKey().equals("isReady"))
                     if( (boolean)snapshot.getValue() == true){
-                        //Intent multiLazer = new Intent(this, MultiLazer.class);
-                        Log.e("Difficulte", difficulte);
+                        if(Objects.equals(role, "HOST")){
+                            reference = database.getReference("ingame_room/" + roomName);
+                            reference.get().addOnCompleteListener(task1 ->{
+                                if(task1.getResult().getValue() == null){
+                                    DatabaseReference child = reference.child("difficulty");
+                                    child.setValue(difficulty.toLowerCase());
+                                    DatabaseReference progress = reference.child("progress");
+                                    progress.setValue(50);
+                                    DatabaseReference combo1 = reference.child("comboHost");
+                                    combo1.setValue(0);
+                                    DatabaseReference combo2 = reference.child("comboGuest");
+                                    combo2.setValue(0);
+                                    database.getReference("/multiplayer_room/" + roomName).removeValue();
+                                }
+                                else {
+                                    Toast.makeText(LoadingMultiplayer.this, "Erreur", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+                        Intent multiLazer = new Intent(LoadingMultiplayer.this, LazerMulti.class);
+                        multiLazer.putExtra("ID_PARTY", roomName);
+                        multiLazer.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS,difficulty);
+                        multiLazer.putExtra("ROLE",role);
+                        startActivity(multiLazer);
+                        finish();
+                        Log.e("Difficulte", difficulty);
                     }
             }
 

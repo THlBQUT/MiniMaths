@@ -20,7 +20,16 @@
         android:theme="@style/Theme.MiniMaths"
         tools:targetApi="31">
         <activity
+            android:name=".LazerMultiVictory"
+            android:exported="false" />
+        <activity
+            android:name=".LazerMultiDefeat"
+            android:exported="false" />
+        <activity
             android:name=".meteorite.MeteorMenu"
+            android:exported="false" />
+        <activity
+            android:name=".LazerMulti"
             android:exported="false" />
         <activity
             android:name=".PartyList"

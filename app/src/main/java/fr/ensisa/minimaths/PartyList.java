@@ -116,6 +116,7 @@ public class PartyList extends AppCompatActivity {
                 Intent loading = new Intent(this, LoadingMultiplayer.class);
                 loading.putExtra("ID_PARTY", playerName);
                 loading.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS,difficulty);
+                loading.putExtra("ROLE","HOST");
                 startActivity(loading);
             }
             else {

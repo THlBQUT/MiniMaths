@@ -1,7 +1,9 @@
 package fr.ensisa.minimaths;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +12,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ViewHolder> {
 
+    private PartyList context;
     private ArrayList<Room> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
@@ -24,6 +32,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ViewHolder> {
     RoomAdapter(Context context, ArrayList<Room> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
+        this.context = (PartyList) context;
     }
 
     // inflates the row layout from xml when needed
@@ -82,6 +91,21 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ViewHolder> {
             }
             Log.e("Position", String.valueOf(position));
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            FirebaseDatabase database = FirebaseDatabase.getInstance("https://minimaths-84e80-default-rtdb.europe-west1.firebasedatabase.app/");
+            DatabaseReference reference = database.getReference("multiplayer_room/" + roomName.getText());
+            Intent loading = new Intent(context, LoadingMultiplayer.class);
+            loading.putExtra("ID_PARTY", roomName.getText());
+            loading.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, String.valueOf(roomDifficulty.getText()).split(" ")[1].toUpperCase());
+            loading.putExtra("ROLE","GUEST");
+            context.startActivity(loading);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    reference.child("isReady").setValue(true);
+                    context.finish();
+                }
+            },2000);
         }
     }
 
