@@ -70,6 +70,9 @@ public class PartyList extends AppCompatActivity {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                if(snapshot.getKey().equals("isReady")){
+                    Log.e("ParentKey :", previousChildName);
+                }
             }
 
             @Override
@@ -124,9 +127,5 @@ public class PartyList extends AppCompatActivity {
             }
         });
 
-    }
-
-    public void launchRoom(View v){
-        Toast.makeText(getApplicationContext(), "Room ",Toast.LENGTH_LONG).show();
     }
 }

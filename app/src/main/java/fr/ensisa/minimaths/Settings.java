@@ -69,10 +69,6 @@ public class Settings extends AppCompatActivity {
                     vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
             }
         });
-        account = GoogleSignIn.getLastSignedInAccount(this);
-        if (account != null){
-            editPseudo.setText(account.getDisplayName());
-        }
 
         vibration = findViewById(R.id.settings_button_vibration);
         vibration.setChecked(preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true));
@@ -86,7 +82,9 @@ public class Settings extends AppCompatActivity {
             }
         });
 
-        pseudo = preferences.getString("SHARED_PREF_MAIN_PSEUDO", "");
+        account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account != null) pseudo = account.getDisplayName();
+        else pseudo = preferences.getString("SHARED_PREF_MAIN_PSEUDO", "");
         editPseudo = findViewById(R.id.settings_edittext_pseudo);
         editPseudo.setText(pseudo);
         editPseudo.addTextChangedListener(new TextWatcher() {

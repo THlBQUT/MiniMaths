@@ -32,12 +32,15 @@
             android:name=".LazerMulti"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".PartyList"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".LoadingMultiplayer"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".MultiDifficulty"
             android:exported="false" />
         <activity
