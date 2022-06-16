@@ -3,11 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Thibaut/AndroidStudioProjects/MiniMaths2/app/src/main/res/layout/activity_lazer_battle_menu.xml" value="0.10625" />
-        <entry key="..\:/Users/Thibaut/AndroidStudioProjects/MiniMaths2/app/src/main/res/layout/activity_lazer_multi.xml" value="0.10625" />
-        <entry key="..\:/Users/Thibaut/AndroidStudioProjects/MiniMaths2/app/src/main/res/layout/activity_multi_difficulty.xml" value="0.264" />
-        <entry key="..\:/Users/Thibaut/AndroidStudioProjects/MiniMaths2/app/src/main/res/layout/activity_party_list.xml" value="0.10625" />
-        <entry key="..\:/Users/Thibaut/AndroidStudioProjects/MiniMaths2/app/src/main/res/layout/settings_activity.xml" value="0.109375" />
         <entry key="app/src/main/res/drawable/gradient.xml" value="0.2275" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.2275" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_forward_ios_24.xml" value="0.2275" />
