@@ -44,6 +44,7 @@ public class LazerMulti extends AppCompatActivity {
     private Equation equation;
     private long compteur1 = 0;
     private long compteur2 = 0;
+    private int compteurMax = 0;
     private String difficulty = Constantes.DEFAULT_DIFFICULTY;
     private boolean isIntroSkip = false;
     private boolean finDePartie = false;
@@ -152,6 +153,8 @@ public class LazerMulti extends AppCompatActivity {
                         }
                     }
                 }
+                if (compteur1 > compteurMax)
+                    compteurMax = (int)compteur1;
             }
 
             @Override
@@ -310,6 +313,12 @@ public class LazerMulti extends AppCompatActivity {
                 Intent activityDefeat = new Intent(LazerMulti.this, DefeatActivity.class);
                 activityDefeat.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, difficulty);
                 startActivity(activityDefeat);
+
+                String nomParametresMS = "SHARED_PREF_MAIN_LAZER_MS_" + difficulty;
+                if (compteurMax > preferences.getInt(nomParametresMS, 0)){
+                    editor.putInt(nomParametresMS, compteurMax);
+                    editor.apply();
+                }
                 mp.stop();
                 if(Objects.equals(role, "HOST"))
                     reference.removeValue();
@@ -350,6 +359,14 @@ public class LazerMulti extends AppCompatActivity {
                 Intent activityWin = new Intent(LazerMulti.this, WinActivity.class);
                 activityWin.putExtra(Constantes.ID_DIFFICULTY_NAME_EXTRAS, difficulty);
                 startActivity(activityWin);
+
+                String nomParametresMS = "SHARED_PREF_MAIN_LAZER_MS_" + difficulty;
+                String nomParametresNV = "SHARED_PREF_MAIN_LAZER_NV_" + difficulty;
+                if (compteurMax > preferences.getInt(nomParametresMS, 0)){
+                    editor.putInt(nomParametresMS, compteurMax);
+                    editor.apply();
+                }
+
                 if(Objects.equals(role, "HOST"))
                     reference.removeValue();
             }

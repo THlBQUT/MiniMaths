@@ -47,15 +47,15 @@ public class MultiDifficulty extends AppCompatActivity {
         nv_moyen = findViewById(R.id.multi_nbVictoires_moyen);
         nv_difficile = findViewById(R.id.multi_nbVictoires_difficile);
 
-        ms_facile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_MS_FACILE", 0)));
-        ms_moyen.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_MS_MOYEN", 0)));
-        ms_difficile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_MS_DIFFICILE", 0)));
-        np_facile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_NP_FACILE", 0)));
-        np_moyen.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_NP_MOYEN", 0)));
-        np_difficile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_NP_DIFFICILE", 0)));
-        nv_facile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_NV_FACILE", 0)));
-        nv_moyen.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_NV_MOYEN", 0)));
-        nv_difficile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_QUIZ_NV_DIFFICILE", 0)));
+        ms_facile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_LAZER_MS_FACILE", 0)));
+        ms_moyen.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_LAZER_MS_MOYEN", 0)));
+        ms_difficile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_LAZER_MS_DIFFICILE", 0)));
+        np_facile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_LAZER_NP_FACILE", 0)));
+        np_moyen.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_LAZER_NP_MOYEN", 0)));
+        np_difficile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_LAZER_NP_DIFFICILE", 0)));
+        nv_facile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_LAZER_NV_FACILE", 0)));
+        nv_moyen.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_LAZER_NV_MOYEN", 0)));
+        nv_difficile.setText(Integer.toString(preferences.getInt("SHARED_PREF_MAIN_LAZER_NV_DIFFICILE", 0)));
 
         animSlideIn3 = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_down);
         animZoomIn9 = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_in);

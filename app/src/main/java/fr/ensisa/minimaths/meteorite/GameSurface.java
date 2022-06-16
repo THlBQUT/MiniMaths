@@ -27,6 +27,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 
     private int screenHeight;
     private int screenWidth;
+    private int soundIdBackground;
 
     private Panel panel;
 
@@ -40,7 +41,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         this.screenHeight = displayMetrics.heightPixels;
         this.screenWidth = displayMetrics.widthPixels;
-        // Make Game Surface focusable so it can handle events.
+
         this.setFocusable(true);
 
         this.getHolder().addCallback(this);
@@ -98,7 +99,6 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
-    // Implements method of SurfaceHolder.Callback
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         int value;
@@ -116,13 +116,11 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
         this.gameThread.start();
     }
 
-    // Implements method of SurfaceHolder.Callback
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 
     }
 
-    // Implements method of SurfaceHolder.Callback
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         boolean retry= true;

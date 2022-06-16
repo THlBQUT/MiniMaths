@@ -147,7 +147,7 @@ public class SoloGameList extends AppCompatActivity {
     }
 
     public void goToMeteorTip(View v) {
-        Toast viewToast = Toast.makeText(this, "Précision, rapidité et calcul, rattrapez les bonnes météorites pour obtenir le meilleur score et sauvez ce qu’il reste de cette ville détruite par le professeur MicMath.", Toast.LENGTH_LONG);
+        Toast viewToast = Toast.makeText(this, "Ayant consommé des substances douteuses fabriquées par le maléfique docteur MicMath le personnage se retrouve dans un rêve bizarre où il doit détruire des météorites de la tête pour résoudre des équations mathématiques.", Toast.LENGTH_LONG);
         viewToast.show();
         if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
             vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));

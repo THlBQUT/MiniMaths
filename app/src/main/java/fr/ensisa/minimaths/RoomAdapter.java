@@ -83,13 +83,6 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ViewHolder> {
         @Override
         public void onClick(View view) {
             Log.e("Click on :",roomName.getText() + " : OK \r\n" + "difficulty : " + roomDifficulty.getText());
-            int position = -1;
-            for (int i = 0; i < mData.size(); i++){
-                if (roomName.getText().equals(mData.get(i).getName())){
-                    position = i;
-                }
-            }
-            Log.e("Position", String.valueOf(position));
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
             FirebaseDatabase database = FirebaseDatabase.getInstance("https://minimaths-84e80-default-rtdb.europe-west1.firebasedatabase.app/");
             DatabaseReference reference = database.getReference("multiplayer_room/" + roomName.getText());
@@ -103,6 +96,9 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.ViewHolder> {
                 @Override
                 public void run() {
                     reference.child("isReady").setValue(true);
+                    Log.e("Reference :", reference.getKey());
+                    reference.setValue(null);
+                    Log.e("Reference :", reference.getKey());
                     context.finish();
                 }
             },2000);
