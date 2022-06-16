@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -39,11 +42,17 @@ public class PartyList extends AppCompatActivity {
     private String difficulty;
     private DatabaseReference reference;
     private FirebaseDatabase database;
+    private Vibrator vibrator;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_party_list);
+
+        preferences = getSharedPreferences("SHARED_PREF_MAIN", MODE_PRIVATE);
+        vibrator = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
+
         RecyclerView recyclerView = findViewById(R.id.rvRoom);
         Bundle extras = getIntent().getExtras();
         if(extras != null) {this.difficulty= extras.getString(Constantes.ID_DIFFICULTY_NAME_EXTRAS);}
@@ -127,5 +136,34 @@ public class PartyList extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void backButton(View v){
+        onBackPressed();
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+    }
+
+    public void goToHome(View v){
+        Intent home = new Intent(this, MainActivity.class);
+        startActivity(home);
+        overridePendingTransition(0, android.R.anim.slide_out_right);
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+    }
+
+    public void goToRanking(View v){
+        Intent ranking = new Intent(this, Ranking.class);
+        startActivity(ranking);
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
+        finish();
+    }
+
+    public void goToSettings(View v){
+        Intent settingsIntent = new Intent(this, Settings.class);
+        startActivity(settingsIntent);
+        if (preferences.getBoolean("SHARED_PREF_MAIN_VIBRATION", true))
+            vibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
     }
 }
